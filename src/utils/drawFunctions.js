@@ -1,12 +1,14 @@
-import { Point, Path, Shape } from 'paper';
+import { Path } from 'paper';
 
 let smallCircle = null;
 let dot = null;
+let path = null;
 let R = 280;
 let r = 100;
 const Cx = 300;
 const Cy = 300;
 const f = -1.2;
+let speed = 1;
 
 const lazyInstantiate = () => {
   if (smallCircle === null) {
@@ -27,8 +29,12 @@ const lazyInstantiate = () => {
     dot = new Path.Circle({
       center: [dotCenterX, Cy],
       radius: 3,
-      fillColor: 'black'
+      fillColor: 'red'
     })
+
+    path = new Path();
+		path.strokeColor = 'orange';
+		path.moveTo(dot.position);
   }
 }
 
@@ -38,7 +44,7 @@ export const draw = (event) => {
   // rectangle.position.x += event.delta*40;
   // rectangle.position.y += event.delta*120;w
   // smallCircle.rotate(2);
- const angle = event.time;
+ const angle = event.time * speed;
  const positionX = Math.cos(angle) * (R-r) + Cx;
  const positionY = Math.sin(angle) * (R-r) + Cy;
 
@@ -49,29 +55,11 @@ export const draw = (event) => {
  const pX = Math.cos(smallAngle) * r * f + positionX;
  const pY = Math.sin(smallAngle) * r * f + positionY;
 
- const path = new Path();
-		path.strokeColor = 'black';
-		// const start = new Point(100, 100);
-		path.moveTo(dot.position);
-		path.lineTo([pX, pY]);
+ path.lineTo([pX, pY]);
 
  dot.position.x = pX;
  dot.position.y = pY;
 }
-
-
-
-//  dot.position.x = Math.cos(angle) * 170 + 300;
-//  dot.position.y = Math.sin(angle) * 210 + 300;
-
-//  if(dot.position.x > 250) {
-//    dot.position.x = 210
-//  }
-
-//  if(dot.position.y > 250) {
-//    dot.position.y = 210
-//  }
-
 
 
   	
