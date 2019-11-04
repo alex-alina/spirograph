@@ -1,13 +1,19 @@
 import { Path } from 'paper';
 
 let movingCircle = null;
+
 // drawing point, placed anywhere inside the moving circle
 let dot = null;
+
+// line segments that get drawed
 let path = null;
+
 // guide circle's radius / change to let
 const R = 280;
+
 // moving circle's radius  / change to let
 const r = 150;
+
 //  guide circle' center (Cx, Cy)
 const Cx = 300;
 const Cy = 300;
@@ -17,9 +23,10 @@ const Cy = 300;
 // Ex: f = 1 the drawing point is on the edge/outile of the moving circle
 // Ex: f = 0.5 drawing point is halfway between the center and outline
 const f = 0.6;
+
 //  the size of drawing step
 const speed = 1;
-
+// cata vreme avem un moving circle nu mai reinstantiem celelalte obiecte
 const lazyInstantiate = () => {
   if (movingCircle === null) {
     movingCircle = new Path.Circle({
@@ -28,6 +35,8 @@ const lazyInstantiate = () => {
       strokeColor: '#79aaf7',
       strokeWidth: 1,
     });
+    // paperjs' engine is designed to work with side effects and stores
+    // the reference for the circle below
     // eslint-disable-next-line no-new
     new Path.Circle({
       center: [Cx, Cy],

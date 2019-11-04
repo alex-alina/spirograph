@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import DrawSection from './components/DrawSection/DrawSection';
+import DrawingSection from './containers/DrawingSection/DrawingSection';
 
 function App() {
   return (
     <div className="App">
-      <DrawSection />
+      <DrawingSection />
     </div>
   );
 }
