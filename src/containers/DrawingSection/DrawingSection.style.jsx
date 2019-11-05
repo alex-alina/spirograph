@@ -26,6 +26,9 @@ export const ButtonsContainer = style(Container)`
 export const CommandsContainer = style(Container)`
   width: 100%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 `;
 
 export const CanvasContainer = style(Container)`

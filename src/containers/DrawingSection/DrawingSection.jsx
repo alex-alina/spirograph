@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import paper, { Path } from 'paper';
 import { PhotoshopPicker } from 'react-color';
-import Container from '../../components/Container/Container';
 import Button from '../../components/Button/Button';
+import Label from '../../components/Label/Label';
 import {
   CanvasContainer,
   StyledCanvas,
@@ -11,6 +11,7 @@ import {
   CommandsContainer,
   WrapperContainer,
 } from './DrawingSection.style';
+import Slider from '../../components/Slider/Slider';
 
 const DrawSection = () => {
   // const [background, setbackground] = useState('#fff');
@@ -39,10 +40,10 @@ const DrawSection = () => {
   // Ex: f = 1 the drawing point is on the edge/outile of the moving circle
   // Ex: f = 0.5 drawing point is halfway between the center and outline
   // const f = 0.6;
-  const [f, setF] = useState(0.6);
+  const [f, setF] = useState(0.1);
 
   //  the size of drawing step
-  const [speed, setSpeed] = useState(1);
+  const [speed, setSpeed] = useState(5);
 
   let [isDisabledBegin, setDisableBegin] = useState(false);
   let [isDisabledClear, setDisableClear] = useState(true);
@@ -109,6 +110,11 @@ const DrawSection = () => {
     paper.setup('myCanvas');
   };
 
+  const screenWidth = window.screen.width;
+  const screenHeight = window.screen.height;
+  // console.log('wheight', screenWidth / screenHeight);
+
+
   const handleStart = () => {
     paper.view.onFrame = draw;
     setDisableClear(true);
@@ -126,11 +132,20 @@ const DrawSection = () => {
     paper.setup('myCanvas');
   };
 
+  const handleSpeed = (event) => {
+    const { value } = event.target;
+    setSpeed(value);
+  };
+
+  const handleMovePoint = (event) => {
+    const { value } = event.target;
+    setF(value);
+  };
 
   return (
     <WrapperContainer>
       <CanvasContainer>
-        <h1>Hello Draw</h1>
+        <h2>Draw a Spirograph</h2>
         <ButtonsContainer>
           <Button
             type="button"
@@ -161,7 +176,32 @@ const DrawSection = () => {
         <StyledCanvas id="myCanvas" />
       </CanvasContainer>
       <CommandsContainer>
-        <h1>Some commands</h1>
+        <div>
+          <h2>Some commands will be added</h2>
+        </div>
+        <Label htmlFor="speed">
+        Speed
+          <Slider
+            name="speed"
+            min="1"
+            max="10"
+            step="1"
+            value={speed}
+            onChange={handleSpeed}
+          />
+        </Label>
+
+        <Label htmlFor="speed">
+        Move drawing point
+          <Slider
+            name="f"
+            min="0"
+            max="1"
+            step="0.1"
+            value={f}
+            onChange={handleMovePoint}
+          />
+        </Label>
       </CommandsContainer>
     </WrapperContainer>
   );
