@@ -10,6 +10,7 @@ const StyledButton = styled.button`
 
     if (props.primary) color = '#387002';
     if (props.secondary) color = '#bb4d00';
+    if (props.disabled) color = '#b8b8b8';
 
     return color;
   }};
@@ -18,6 +19,8 @@ const StyledButton = styled.button`
     let borderColor = '#42a5f5';
     if (props.primary) borderColor = '#7cb342';
     if (props.secondary) borderColor = '#ffa726';
+    if (props.disabled) borderColor = '#b8b8b8';
+
     return `1.7px solid ${borderColor}`;
   }};
   
@@ -27,6 +30,7 @@ const StyledButton = styled.button`
   margin: 1em;
   padding: 0.25em 1em;
   border-radius: 3px;
+  outline:none;
 `;
 
 export default StyledButton;
