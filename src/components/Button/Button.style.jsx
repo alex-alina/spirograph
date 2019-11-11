@@ -1,6 +1,22 @@
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
+-webkit-appearance: none;
+-moz-appearance: none;
+
+width: 8rem;
+min-width: 60px;
+font-size: 1.2em;
+margin: 1em;
+padding: 0.25em 1em;
+border-radius: 3px;
+outline:none;
+
+&::-moz-focus-inner {
+  outline: none;
+  border-color: transparent;
+}
+
   background-color: ${(props) => (
     props.primary || props.secondary ? '#fff' : '#f7f7f7'
   )};
@@ -23,14 +39,6 @@ const StyledButton = styled.button`
 
     return `1.7px solid ${borderColor}`;
   }};
-  
-  width: 8rem;
-  min-width: 60px;
-  font-size: 1.2em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border-radius: 3px;
-  outline:none;
 `;
 
 export default StyledButton;

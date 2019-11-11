@@ -1,5 +1,5 @@
 /* eslint-disable prefer-const */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import paper, { Path } from 'paper';
 import { PhotoshopPicker } from 'react-color';
 import Button from '../../components/Button/Button';
@@ -43,12 +43,19 @@ const DrawSection = () => {
   const [f, setF] = useState(0.1);
 
   //  the size of drawing step
-  const [speed, setSpeed] = useState(5);
+  let [speed, setSpeed] = useState(5);
 
   let [isDisabledBegin, setDisableBegin] = useState(false);
   let [isDisabledClear, setDisableClear] = useState(true);
 
   let [isCircleColored, setCircleColor] = useState('#fff');
+
+  useEffect(() => {
+    const { window } = global;
+
+    paper.install(window);
+    paper.setup('myCanvas');
+  }, []);
 
   // all objects in the functions below are instantiated once,
   const lazyInstantiate = () => {
@@ -72,8 +79,8 @@ const DrawSection = () => {
       const dotCenterX = Cx + R - r * (1 - f);
       dot = new Path.Circle({
         center: [dotCenterX, Cy],
-        radius: 3,
-        fillColor: 'transparent',
+        radius: 1,
+        fillColor: 'black',
       });
 
       path = new Path();
@@ -103,17 +110,12 @@ const DrawSection = () => {
     dot.position.y = pY;
   };
 
-  const { window } = global;
+  // const { window } = global;
 
-  window.onload = () => {
-    paper.install(window);
-    paper.setup('myCanvas');
-  };
-
-  const screenWidth = window.screen.width;
-  const screenHeight = window.screen.height;
-  // console.log('wheight', screenWidth / screenHeight);
-
+  // window.onload = () => {
+  //   paper.install(window);
+  //   paper.setup('myCanvas');
+  // };
 
   const handleStart = () => {
     paper.view.onFrame = draw;
@@ -161,7 +163,7 @@ const DrawSection = () => {
             onClick={handleStop}
             secondary
           >
-        End
+        Stop
           </Button>
 
           <Button
@@ -180,7 +182,7 @@ const DrawSection = () => {
           <h2>Some commands will be added</h2>
         </div>
         <Label htmlFor="speed">
-        Speed
+          <div>Speed</div>
           <Slider
             name="speed"
             min="1"
@@ -188,11 +190,12 @@ const DrawSection = () => {
             step="1"
             value={speed}
             onChange={handleSpeed}
+            className="slider"
           />
         </Label>
 
-        <Label htmlFor="speed">
-        Move drawing point
+        <Label htmlFor="f">
+          <div>Move drawing point</div>
           <Slider
             name="f"
             min="0"
@@ -200,6 +203,7 @@ const DrawSection = () => {
             step="0.1"
             value={f}
             onChange={handleMovePoint}
+            className="slider"
           />
         </Label>
       </CommandsContainer>

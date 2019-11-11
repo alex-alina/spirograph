@@ -11,21 +11,18 @@ align-content: center;
   flex-direction: row;
   justify-content: space-bewteen;
 }
-
 `;
 
 export const ButtonsContainer = style(Container)`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-evenly;
   padding-left: 0;
-  @media(min-width: 1100px) {
-    padding-left: 8%;
-  }
+  
 `;
 
 export const CommandsContainer = style(Container)`
   width: 100%;
-  margin: 0 auto;
+  padding: 2em;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

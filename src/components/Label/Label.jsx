@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import StyledButton from './Button.style';
+import StyledLabel from './Label.style';
 
 export default function Label(props) {
   const { htmlFor, children } = props;
 
   return (
-    <label htmlFor={htmlFor}>
+    <StyledLabel htmlFor={htmlFor}>
       {children}
-    </label>
-
+    </StyledLabel>
   );
 }
 
