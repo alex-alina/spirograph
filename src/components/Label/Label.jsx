@@ -14,5 +14,5 @@ export default function Label(props) {
 
 Label.propTypes = {
   htmlFor: PropTypes.string.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
 };

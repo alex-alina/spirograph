@@ -5,7 +5,9 @@ export const WrapperContainer = style(Container)`
 display: flex;
 flex-direction: column;
 justify-content: center;
-align-content: center;
+// align-content: center;
+width: 100%;
+margin-top: 130px;
 
 @media(min-width: 1100px) {
   flex-direction: row;
@@ -43,7 +45,7 @@ export const StyledCanvas = style.canvas`
   height: 95vw;
 
   @media(min-width: 1100px) {
-    width: 75vh;
-    height: 75vh;
+    width: 70vh;
+    height: 70vh;
   }
 `;

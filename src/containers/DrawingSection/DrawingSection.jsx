@@ -4,6 +4,10 @@ import paper, { Path } from 'paper';
 import { PhotoshopPicker } from 'react-color';
 import Button from '../../components/Button/Button';
 import Label from '../../components/Label/Label';
+import Text from '../../components/Text/Text';
+import Slider from '../../components/Slider/Slider';
+import H2 from '../../components/H2/H2';
+
 import {
   CanvasContainer,
   StyledCanvas,
@@ -11,7 +15,7 @@ import {
   CommandsContainer,
   WrapperContainer,
 } from './DrawingSection.style';
-import Slider from '../../components/Slider/Slider';
+
 
 const DrawSection = () => {
   // const [background, setbackground] = useState('#fff');
@@ -32,6 +36,7 @@ const DrawSection = () => {
   const [r, setSmallR] = useState(150);
 
   // guide circle' center (Cx, Cy)
+
   const [Cx, setCx] = useState(350);
   const [Cy, setCy] = useState(350);
 
@@ -84,7 +89,7 @@ const DrawSection = () => {
       });
 
       path = new Path();
-      path.strokeColor = 'orange';
+      path.strokeColor = '#42a7f5';
       path.moveTo(dot.position);
     }
   };
@@ -147,7 +152,6 @@ const DrawSection = () => {
   return (
     <WrapperContainer>
       <CanvasContainer>
-        <h2>Draw a Spirograph</h2>
         <ButtonsContainer>
           <Button
             type="button"
@@ -179,10 +183,10 @@ const DrawSection = () => {
       </CanvasContainer>
       <CommandsContainer>
         <div>
-          <h2>Some commands will be added</h2>
+          <H2>Change the parameters below then draw a new spirograph</H2>
         </div>
         <Label htmlFor="speed">
-          <div>Speed</div>
+          <Text>Speed</Text>
           <Slider
             name="speed"
             min="1"
@@ -195,7 +199,7 @@ const DrawSection = () => {
         </Label>
 
         <Label htmlFor="f">
-          <div>Move drawing point</div>
+          <Text>Change drawing point</Text>
           <Slider
             name="f"
             min="0"

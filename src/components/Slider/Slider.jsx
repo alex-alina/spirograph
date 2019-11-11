@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// eslint-disable-next-line import/no-cycle
 import StyledSlider from './Slider.style';
 
 export default function Slider(props) {
@@ -31,6 +32,6 @@ Slider.propTypes = {
   max: PropTypes.string.isRequired,
   step: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
 };
