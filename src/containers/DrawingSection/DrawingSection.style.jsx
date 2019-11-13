@@ -41,6 +41,8 @@ export const CanvasContainer = style(Container)`
 
 export const StyledCanvas = style.canvas`
   border: 1px solid transparent;
+  background-color: ${(props) => props.backgroundColor};
+
   box-shadow: 
     0 0  0 2px rgb(255, 255, 255),
     0.1em 0.1em 1em rgba(0, 0, 0, 0.1);

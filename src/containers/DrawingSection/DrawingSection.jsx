@@ -19,7 +19,7 @@ import Container from '../../components/Container/Container';
 
 
 const DrawSection = () => {
-  // const [background, setbackground] = useState('#fff');
+  const [canvasBackground, setCanvasBackground] = useState('#fff');
   // const [lineColor, setLineColor] = useState('orange');
   let [referenceCircle, setReferenceCircle] = useState(null);
   let [movingCircle, setMovingCircle] = useState(null);
@@ -195,7 +195,11 @@ const DrawSection = () => {
           </Button>
         </ButtonsContainer>
 
-        <StyledCanvas id="myCanvas" resize />
+        <StyledCanvas
+          id="myCanvas"
+          resize
+          backgroundColor={canvasBackground}
+        />
       </CanvasContainer>
 
       <CommandsContainer>
