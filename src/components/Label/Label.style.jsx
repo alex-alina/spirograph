@@ -1,0 +1,49 @@
+import styled from 'styled-components';
+
+const StyledLabel = styled.label`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  margin-bottom: 1em;
+  div {
+    padding: 1em 0;
+  }
+  .slider {
+    width: 65%;
+  }
+
+  @media(min-width: 1100px) {
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: space-between;
+    width: 50%;
+    margin: 10px auto;
+    
+    div {
+      margin-right: 20px;
+      padding: 0;
+      flex: 2;
+    }
+    .slider {
+      flex: 3;
+    }
+  }
+  @media(min-width: 1245px) {
+    width: 80%;
+    
+    div {
+      margin-right: 20px;
+      padding: 0;
+      flex: 3;
+    }
+    .slider {
+      flex: 4;
+    }
+  }
+`;
+
+
+export default StyledLabel;
