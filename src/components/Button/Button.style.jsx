@@ -1,43 +1,56 @@
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
--webkit-appearance: none;
--moz-appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  
+  width: auto;
+  max-width: 250px;
+  min-width: 80px;
+  font-size: 1em;
+  line-height: 1.5;
+  margin:  2em 1em 1em 1em;
+  padding: 1em, 3em;
+  border-radius: 50px;
+  outline:none;
+  
+  @media(min-width: 1000px) {
+    font-size: 1.2em;
+    min-width: 100px;
+  }
+  
+  &::-moz-focus-inner {
+    outline: none;
+    border-color: transparent;
+  }
 
-width: 8rem;
-min-width: 60px;
-font-size: 1.2em;
-margin:  2em 1em 1em 1em;
-padding: 0.25em 1em;
-border-radius: 3px;
-outline:none;
+  background-color: ${(props) => {
+    let backgroundColor = '#2fa4ed';
 
-&::-moz-focus-inner {
-  outline: none;
-  border-color: transparent;
-}
+    if (props.primary) backgroundColor = '#2fa4ed';
+    if (props.secondary) backgroundColor = '#fca103';
+    if (props.disabled) backgroundColor = '#999';
 
-  background-color: ${(props) => (
-    props.primary || props.secondary ? '#fff' : '#f7f7f7'
-  )};
+    return backgroundColor;
+  }};
 
   color: ${(props) => {
-    let color = '#004c8c';
+    let color = '#fff';
 
-    if (props.primary) color = '#387002';
-    if (props.secondary) color = '#bb4d00';
-    if (props.disabled) color = '#b8b8b8';
+    if (props.primary) color = '#fff';
+    if (props.secondary) color = '#fff';
+    if (props.disabled) color = '#fff';
 
     return color;
   }};
 
   border: ${(props) => {
     let borderColor = '#42a5f5';
-    if (props.primary) borderColor = '#7cb342';
-    if (props.secondary) borderColor = '#ffa726';
-    if (props.disabled) borderColor = '#b8b8b8';
+    if (props.primary) borderColor = '#2fa4ed';
+    if (props.secondary) borderColor = '#fca103';
+    if (props.disabled) borderColor = '#999';
 
-    return `1.7px solid ${borderColor}`;
+    return `1.6px solid ${borderColor}`;
   }};
 `;
 

@@ -15,12 +15,13 @@ import {
   CommandsContainer,
   WrapperContainer,
 } from './DrawingSection.style';
+import Container from '../../components/Container/Container';
 
 
 const DrawSection = () => {
   // const [background, setbackground] = useState('#fff');
   // const [lineColor, setLineColor] = useState('orange');
-
+  let [referenceCircle, setReferenceCircle] = useState(null);
   let [movingCircle, setMovingCircle] = useState(null);
 
   // drawing point, placed anywhere inside the moving circle
@@ -30,15 +31,15 @@ const DrawSection = () => {
   let [path, setPath] = useState(null);
 
   // guide circle's radius / change to let
-  const [R, setR] = useState(280);
+  const [R, setR] = useState(null);
 
   // moving circle's radius  / change to let
-  const [r, setSmallR] = useState(150);
+  const [r, setSmallR] = useState(140);
 
   // guide circle' center (Cx, Cy)
-
-  const [Cx, setCx] = useState(350);
-  const [Cy, setCy] = useState(350);
+  // const calculateX = paper.view.bounds.width - paper.view.bounds.center.x;
+  let [Cx, setCx] = useState(null);
+  let [Cy, setCy] = useState(null);
 
   // fraction of the moving circle's radius where the drawing point is placed
   // Ex: f = 0 the drawing point is in the center of the moving circle
@@ -50,10 +51,12 @@ const DrawSection = () => {
   //  the size of drawing step
   let [speed, setSpeed] = useState(5);
 
+  // shows the reference circle and the moving circle
+  let [isCirclesDisplayed, setDisplayCircles] = useState(false);
+
   let [isDisabledBegin, setDisableBegin] = useState(false);
   let [isDisabledClear, setDisableClear] = useState(true);
 
-  let [isCircleColored, setCircleColor] = useState('#fff');
 
   useEffect(() => {
     const { window } = global;
@@ -62,26 +65,22 @@ const DrawSection = () => {
     paper.setup('myCanvas');
   }, []);
 
-  // all objects in the functions below are instantiated once,
+  // all objects in the functions below are instantiated once
   const lazyInstantiate = () => {
     if (movingCircle === null) {
       movingCircle = new Path.Circle({
+        // intreaba-l pe adi de ce modificarea centrului nu are efecte
         center: [10, 10],
         radius: r,
-        strokeColor: isCircleColored,
+        strokeColor: isCirclesDisplayed ? '#999' : 'transparent',
         strokeWidth: 1,
       });
 
-      // paperjs's engine works w/ side effects and stores the circle's reference
-      // eslint-disable-next-line no-new
-      new Path.Circle({
-        center: [Cx, Cy],
-        radius: R,
-        strokeColor: isCircleColored,
-        strokeWidth: 1,
-      });
-
+      referenceCircle = new Path.Circle(paper.view.bounds.center, R);
+      referenceCircle.strokeColor = isCirclesDisplayed ? '#999' : 'transparent';
+      referenceCircle.strokeWidth = 1;
       const dotCenterX = Cx + R - r * (1 - f);
+
       dot = new Path.Circle({
         center: [dotCenterX, Cy],
         radius: 1,
@@ -95,9 +94,14 @@ const DrawSection = () => {
   };
 
   // draw() -> callback called every time a frame needs to be drawn by paperjs
-  // @param event (paper.js replaces it with an event argument that has multiple methods)
+  // @param event (paper.js replaces it with an 'event' argument that has multiple methods)
   const draw = (event) => {
     lazyInstantiate();
+
+    paper.view.onResize = () => {
+      referenceCircle.position = paper.view.center;
+    };
+
     const angle = event.time * speed;
     const positionX = Math.cos(angle) * (R - r) + Cx;
     const positionY = Math.sin(angle) * (R - r) + Cy;
@@ -115,12 +119,15 @@ const DrawSection = () => {
     dot.position.y = pY;
   };
 
-  // const { window } = global;
+  useEffect(() => {
+    const calculateR = Math.round(paper.view.bounds.width - paper.view.bounds.center.x);
+    const calculateCx = paper.view.bounds.center.x;
+    const calculateCy = paper.view.bounds.center.y;
 
-  // window.onload = () => {
-  //   paper.install(window);
-  //   paper.setup('myCanvas');
-  // };
+    setR(calculateR);
+    setCx(calculateCx);
+    setCy(calculateCy);
+  }, [Cx, Cy, R]);
 
   const handleStart = () => {
     paper.view.onFrame = draw;
@@ -135,7 +142,7 @@ const DrawSection = () => {
 
   const handleClear = () => {
     setDisableBegin(false);
-    // paper.project.activeLayer.removeChildren();
+    setDisableClear(true);
     paper.setup('myCanvas');
   };
 
@@ -149,6 +156,15 @@ const DrawSection = () => {
     setF(value);
   };
 
+  const handleMovingCircleR = (event) => {
+    const { value } = event.target;
+    setSmallR(value);
+  };
+
+  const toggleDisplayCircles = (event) => {
+    setDisplayCircles(!isCirclesDisplayed);
+  };
+
   return (
     <WrapperContainer>
       <CanvasContainer>
@@ -159,7 +175,7 @@ const DrawSection = () => {
             primary
             disabled={isDisabledBegin}
           >
-        Begin
+        Start
           </Button>
 
           <Button
@@ -179,14 +195,16 @@ const DrawSection = () => {
           </Button>
         </ButtonsContainer>
 
-        <StyledCanvas id="myCanvas" />
+        <StyledCanvas id="myCanvas" resize />
       </CanvasContainer>
+
       <CommandsContainer>
-        <div>
-          <H2>Change the parameters below then draw a new spirograph</H2>
-        </div>
+        <Container>
+          <H2>Change the parameters below and try a new pattern</H2>
+        </Container>
+
         <Label htmlFor="speed">
-          <Text>Speed</Text>
+          <Text>{`Speed: ${speed}`}</Text>
           <Slider
             name="speed"
             min="1"
@@ -199,7 +217,7 @@ const DrawSection = () => {
         </Label>
 
         <Label htmlFor="f">
-          <Text>Change drawing point</Text>
+          <Text>{`Drawing point position: ${f}`}</Text>
           <Slider
             name="f"
             min="0"
@@ -210,6 +228,26 @@ const DrawSection = () => {
             className="slider"
           />
         </Label>
+
+        <Label htmlFor="r">
+          <Text>{`Radius: ${r}`}</Text>
+          <Slider
+            name="r"
+            min="50"
+            max={R - 20}
+            step="10"
+            value={r}
+            onChange={handleMovingCircleR}
+            className="slider"
+          />
+        </Label>
+
+        <Button
+          type="button"
+          onClick={toggleDisplayCircles}
+        >
+        Show Guiding Circles
+        </Button>
       </CommandsContainer>
     </WrapperContainer>
   );

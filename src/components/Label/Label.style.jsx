@@ -19,7 +19,7 @@ const StyledLabel = styled.label`
     flex-direction: row;
     justify-content: space-around;
     align-content: space-between;
-    width: 60%;
+    width: 50%;
     margin: 10px auto;
     
     div {
@@ -29,6 +29,18 @@ const StyledLabel = styled.label`
     }
     .slider {
       flex: 3;
+    }
+  }
+  @media(min-width: 1245px) {
+    width: 80%;
+    
+    div {
+      margin-right: 20px;
+      padding: 0;
+      flex: 3;
+    }
+    .slider {
+      flex: 4;
     }
   }
 `;
