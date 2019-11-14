@@ -14,6 +14,7 @@ import {
   ButtonsContainer,
   CommandsContainer,
   WrapperContainer,
+  SwitchContainer,
 } from './DrawingSection.style';
 import Container from '../../components/Container/Container';
 import Switch from '../../components/Switch/Switch';
@@ -246,10 +247,10 @@ const DrawSection = () => {
           />
         </Label>
 
-        <Container>
-          <Text>Show spirograph</Text>
+        <SwitchContainer>
+          <Text margin="1">Show spirograph</Text>
           <Switch checked={isCircleShown} onChange={toggleShowCircles} />
-        </Container>
+        </SwitchContainer>
 
       </CommandsContainer>
     </WrapperContainer>

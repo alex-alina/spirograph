@@ -43,8 +43,14 @@ export const StyledSwitchBtn = styled.div`
   ${(props) => (props.checked === false ? css`
     float: left;
     margin: 4px 0 6px 4px;
+    @media(min-width: 1254px) {
+      margin: 3px 0 6px 4px;
+    }
     ` : css`
     float: right;
     margin: 4px 4px 6px 0;
+    @media(min-width: 1254px) {
+      margin: 3px 4px 6px 0;
+    }
   `)}
 `;

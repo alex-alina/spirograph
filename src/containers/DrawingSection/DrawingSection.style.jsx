@@ -59,3 +59,16 @@ export const StyledCanvas = style.canvas`
     height: 75vh;
   }
 `;
+
+export const SwitchContainer = style.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+
+  @media(min-width: 1254px) {
+    margin-top: 50vh;
+  }
+  
+`;
