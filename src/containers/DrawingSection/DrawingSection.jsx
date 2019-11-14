@@ -16,6 +16,7 @@ import {
   WrapperContainer,
 } from './DrawingSection.style';
 import Container from '../../components/Container/Container';
+import Switch from '../../components/Switch/Switch';
 
 
 const DrawSection = () => {
@@ -52,11 +53,10 @@ const DrawSection = () => {
   let [speed, setSpeed] = useState(5);
 
   // shows the reference circle and the moving circle
-  let [isCirclesDisplayed, setDisplayCircles] = useState(false);
+  let [isCircleShown, setIsCircleShown] = useState(false);
 
   let [isDisabledBegin, setDisableBegin] = useState(false);
   let [isDisabledClear, setDisableClear] = useState(true);
-
 
   useEffect(() => {
     const { window } = global;
@@ -72,12 +72,12 @@ const DrawSection = () => {
         // intreaba-l pe adi de ce modificarea centrului nu are efecte
         center: [10, 10],
         radius: r,
-        strokeColor: isCirclesDisplayed ? '#999' : 'transparent',
+        strokeColor: isCircleShown ? '#999' : 'transparent',
         strokeWidth: 1,
       });
 
       referenceCircle = new Path.Circle(paper.view.bounds.center, R);
-      referenceCircle.strokeColor = isCirclesDisplayed ? '#999' : 'transparent';
+      referenceCircle.strokeColor = isCircleShown ? '#999' : 'transparent';
       referenceCircle.strokeWidth = 1;
       const dotCenterX = Cx + R - r * (1 - f);
 
@@ -161,8 +161,8 @@ const DrawSection = () => {
     setSmallR(value);
   };
 
-  const toggleDisplayCircles = (event) => {
-    setDisplayCircles(!isCirclesDisplayed);
+  const toggleShowCircles = (event) => {
+    setIsCircleShown(event.target.checked);
   };
 
   return (
@@ -238,7 +238,7 @@ const DrawSection = () => {
           <Slider
             name="r"
             min="50"
-            max={R - 20}
+            max={(R - 20).toString()}
             step="10"
             value={r}
             onChange={handleMovingCircleR}
@@ -246,12 +246,11 @@ const DrawSection = () => {
           />
         </Label>
 
-        <Button
-          type="button"
-          onClick={toggleDisplayCircles}
-        >
-        Show Guiding Circles
-        </Button>
+        <Container>
+          <Text>Show spirograph</Text>
+          <Switch checked={isCircleShown} onChange={toggleShowCircles} />
+        </Container>
+
       </CommandsContainer>
     </WrapperContainer>
   );
