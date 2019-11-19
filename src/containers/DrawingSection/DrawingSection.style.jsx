@@ -20,9 +20,13 @@ overflow-x: hidden;
 
 export const ButtonsContainer = style(Container)`
   display: flex;
-  justify-content: space-evenly;
-  padding-left: 0;
+  justify-content: flex-start; 
+  padding: 0;
+  margin-bottom: 1em; 
   
+  @media(min-width: 700px) {
+    justify-content: space-around;
+  }
 `;
 
 export const CommandsContainer = style(Container)`

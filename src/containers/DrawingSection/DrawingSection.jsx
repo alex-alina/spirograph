@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 import React, { useState, useEffect } from 'react';
 import paper, { Path } from 'paper';
-import { PhotoshopPicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 import Button from '../../components/Button/Button';
 import Label from '../../components/Label/Label';
 import Text from '../../components/Text/Text';
@@ -21,7 +21,7 @@ import Switch from '../../components/Switch/Switch';
 
 
 const DrawSection = () => {
-  const [canvasBackground, setCanvasBackground] = useState('#fff');
+  let [canvasBackground, setCanvasBackground] = useState('#fff');
   // const [lineColor, setLineColor] = useState('orange');
   let [referenceCircle, setReferenceCircle] = useState(null);
   let [movingCircle, setMovingCircle] = useState(null);
@@ -176,7 +176,7 @@ const DrawSection = () => {
             primary
             disabled={isDisabledBegin}
           >
-        Start
+        Start Drawing
           </Button>
 
           <Button
@@ -184,7 +184,7 @@ const DrawSection = () => {
             onClick={handleStop}
             secondary
           >
-        Stop
+        Stop Drawig
           </Button>
 
           <Button
@@ -192,7 +192,7 @@ const DrawSection = () => {
             onClick={handleClear}
             disabled={isDisabledClear}
           >
-        Clear
+        Clear Canvas
           </Button>
         </ButtonsContainer>
 
