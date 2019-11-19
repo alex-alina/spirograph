@@ -5,18 +5,19 @@ const StyledButton = styled.button`
   -moz-appearance: none;
   
   width: auto;
-  max-width: 250px;
-  min-width: 80px;
-  font-size: 1em;
+  max-width: 300px;
+  min-width: 100px;
+  font-size: 0.8em;
   line-height: 1.5;
-  margin:  2em 1em 1em 1em;
-  padding: 1em, 3em;
+  margin:  0.5em;
+  padding: 2em, 3em;
   border-radius: 50px;
   outline:none;
   
-  @media(min-width: 1000px) {
+  @media(min-width: 700px) {
     font-size: 1.2em;
-    min-width: 100px;
+    min-width: 140px;
+    margin:  2em 1em 1em 1em;
   }
   
   &::-moz-focus-inner {

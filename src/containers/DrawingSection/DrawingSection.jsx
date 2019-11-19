@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 import React, { useState, useEffect } from 'react';
 import paper, { Path } from 'paper';
-import { PhotoshopPicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 import Button from '../../components/Button/Button';
 import Label from '../../components/Label/Label';
 import Text from '../../components/Text/Text';
@@ -14,12 +14,14 @@ import {
   ButtonsContainer,
   CommandsContainer,
   WrapperContainer,
+  SwitchContainer,
 } from './DrawingSection.style';
 import Container from '../../components/Container/Container';
+import Switch from '../../components/Switch/Switch';
 
 
 const DrawSection = () => {
-  const [canvasBackground, setCanvasBackground] = useState('#fff');
+  let [canvasBackground, setCanvasBackground] = useState('#fff');
   // const [lineColor, setLineColor] = useState('orange');
   let [referenceCircle, setReferenceCircle] = useState(null);
   let [movingCircle, setMovingCircle] = useState(null);
@@ -52,11 +54,10 @@ const DrawSection = () => {
   let [speed, setSpeed] = useState(5);
 
   // shows the reference circle and the moving circle
-  let [isCirclesDisplayed, setDisplayCircles] = useState(false);
+  let [isCircleShown, setIsCircleShown] = useState(false);
 
   let [isDisabledBegin, setDisableBegin] = useState(false);
   let [isDisabledClear, setDisableClear] = useState(true);
-
 
   useEffect(() => {
     const { window } = global;
@@ -72,12 +73,12 @@ const DrawSection = () => {
         // intreaba-l pe adi de ce modificarea centrului nu are efecte
         center: [10, 10],
         radius: r,
-        strokeColor: isCirclesDisplayed ? '#999' : 'transparent',
+        strokeColor: isCircleShown ? '#999' : 'transparent',
         strokeWidth: 1,
       });
 
       referenceCircle = new Path.Circle(paper.view.bounds.center, R);
-      referenceCircle.strokeColor = isCirclesDisplayed ? '#999' : 'transparent';
+      referenceCircle.strokeColor = isCircleShown ? '#999' : 'transparent';
       referenceCircle.strokeWidth = 1;
       const dotCenterX = Cx + R - r * (1 - f);
 
@@ -161,8 +162,8 @@ const DrawSection = () => {
     setSmallR(value);
   };
 
-  const toggleDisplayCircles = (event) => {
-    setDisplayCircles(!isCirclesDisplayed);
+  const toggleShowCircles = (event) => {
+    setIsCircleShown(event.target.checked);
   };
 
   return (
@@ -175,7 +176,7 @@ const DrawSection = () => {
             primary
             disabled={isDisabledBegin}
           >
-        Start
+        Start Drawing
           </Button>
 
           <Button
@@ -183,7 +184,7 @@ const DrawSection = () => {
             onClick={handleStop}
             secondary
           >
-        Stop
+        Stop Drawig
           </Button>
 
           <Button
@@ -191,7 +192,7 @@ const DrawSection = () => {
             onClick={handleClear}
             disabled={isDisabledClear}
           >
-        Clear
+        Clear Canvas
           </Button>
         </ButtonsContainer>
 
@@ -238,7 +239,7 @@ const DrawSection = () => {
           <Slider
             name="r"
             min="50"
-            max={R - 20}
+            max={(R - 20).toString()}
             step="10"
             value={r}
             onChange={handleMovingCircleR}
@@ -246,12 +247,11 @@ const DrawSection = () => {
           />
         </Label>
 
-        <Button
-          type="button"
-          onClick={toggleDisplayCircles}
-        >
-        Show Guiding Circles
-        </Button>
+        <SwitchContainer>
+          <Text margin="1">Show spirograph</Text>
+          <Switch checked={isCircleShown} onChange={toggleShowCircles} />
+        </SwitchContainer>
+
       </CommandsContainer>
     </WrapperContainer>
   );

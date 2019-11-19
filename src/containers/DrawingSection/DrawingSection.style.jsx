@@ -20,9 +20,13 @@ overflow-x: hidden;
 
 export const ButtonsContainer = style(Container)`
   display: flex;
-  justify-content: space-evenly;
-  padding-left: 0;
+  justify-content: flex-start; 
+  padding: 0;
+  margin-bottom: 1em; 
   
+  @media(min-width: 700px) {
+    justify-content: space-around;
+  }
 `;
 
 export const CommandsContainer = style(Container)`
@@ -58,4 +62,17 @@ export const StyledCanvas = style.canvas`
     width: 75vh;
     height: 75vh;
   }
+`;
+
+export const SwitchContainer = style.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+
+  @media(min-width: 1254px) {
+    margin-top: 50vh;
+  }
+  
 `;
