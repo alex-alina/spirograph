@@ -18,6 +18,7 @@ import {
 } from './DrawingSection.style';
 import Container from '../../components/Container/Container';
 import Switch from '../../components/Switch/Switch';
+import calculateDash from '../../utils/utils';
 
 
 const DrawSection = () => {
@@ -54,6 +55,8 @@ const DrawSection = () => {
   let [speed, setSpeed] = useState(5);
 
   let [lineWeight, setLineWeight] = useState(1);
+  let [lineDash, setLineDash] = useState(0);
+
   // shows the reference circle and the moving circle
   let [isCircleShown, setIsCircleShown] = useState(false);
 
@@ -92,6 +95,7 @@ const DrawSection = () => {
       path = new Path();
       path.strokeColor = '#42a7f5';
       path.strokeWidth = lineWeight;
+      path.dashArray = calculateDash(lineDash);
       path.moveTo(dot.position);
     }
   };
@@ -164,9 +168,14 @@ const DrawSection = () => {
     setSmallR(value);
   };
 
-  const handleLineWieght = (event) => {
+  const handleLineWeight = (event) => {
     const { value } = event.target;
     setLineWeight(value);
+  };
+
+  const handleLineDash = (event) => {
+    const { value } = event.target;
+    setLineDash(value);
   };
 
   const toggleShowCircles = (event) => {
@@ -262,7 +271,20 @@ const DrawSection = () => {
             max="5"
             step="0.5"
             value={lineWeight}
-            onChange={handleLineWieght}
+            onChange={handleLineWeight}
+            className="slider"
+          />
+        </Label>
+
+        <Label htmlFor="lineDash">
+          <Text>{`Line dash: ${lineDash}`}</Text>
+          <Slider
+            name="lineDash"
+            min="0"
+            max="10"
+            step="1"
+            value={lineDash}
+            onChange={handleLineDash}
             className="slider"
           />
         </Label>
