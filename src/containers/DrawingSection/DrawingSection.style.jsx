@@ -34,6 +34,10 @@ export const CommandsContainer = style(Container)`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+
+  @media(min-width: 1254px) {
+    width: 40%;
+  }
 `;
 
 export const CanvasContainer = style(Container)`
@@ -72,7 +76,15 @@ export const SwitchContainer = style.div`
   align-items: center;
 
   @media(min-width: 1254px) {
-    margin-top: 50vh;
+    // margin-top: 50vh;
   }
-  
+`;
+
+export const ColorPickerContainer = style.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  margin: 3% 0 1% 0;
 `;

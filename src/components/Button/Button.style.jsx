@@ -7,10 +7,11 @@ const StyledButton = styled.button`
   width: auto;
   max-width: 300px;
   min-width: 100px;
+  height: 36px;
   font-size: 0.8em;
   line-height: 1.5;
   margin:  0.5em;
-  padding: 2em, 3em;
+  padding: 2em, 4em;
   border-radius: 50px;
   outline:none;
   

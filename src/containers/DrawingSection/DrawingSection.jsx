@@ -15,17 +15,27 @@ import {
   CommandsContainer,
   WrapperContainer,
   SwitchContainer,
+  ColorPickerContainer,
 } from './DrawingSection.style';
 import Container from '../../components/Container/Container';
 import Switch from '../../components/Switch/Switch';
 import calculateDash from '../../utils/utils';
+import ColorPicker from '../ColorPicker/ColorPicker';
 
 
 const DrawSection = () => {
   let [canvasBackground, setCanvasBackground] = useState('#fff');
-  // const [lineColor, setLineColor] = useState('orange');
+  const [lineColor, setLineColor] = useState('#42a7f5');
   let [referenceCircle, setReferenceCircle] = useState(null);
   let [movingCircle, setMovingCircle] = useState(null);
+  let [lineWeight, setLineWeight] = useState(1);
+  let [lineDash, setLineDash] = useState(0);
+  let [isDisabledBegin, setDisableBegin] = useState(false);
+  let [isDisabledClear, setDisableClear] = useState(true);
+
+  // displays the color pickers - aka CP
+  let [isLineCPVisible, setLineCPVisibility] = useState(false);
+  let [isCanvasCPVisible, setCanvasCPVisibility] = useState(false);
 
   // drawing point, placed anywhere inside the moving circle
   let [dot, setDot] = useState(null);
@@ -54,14 +64,8 @@ const DrawSection = () => {
   //  the size of drawing step
   let [speed, setSpeed] = useState(5);
 
-  let [lineWeight, setLineWeight] = useState(1);
-  let [lineDash, setLineDash] = useState(0);
-
   // shows the reference circle and the moving circle
   let [isCircleShown, setIsCircleShown] = useState(false);
-
-  let [isDisabledBegin, setDisableBegin] = useState(false);
-  let [isDisabledClear, setDisableClear] = useState(true);
 
   useEffect(() => {
     const { window } = global;
@@ -93,7 +97,7 @@ const DrawSection = () => {
       });
 
       path = new Path();
-      path.strokeColor = '#42a7f5';
+      path.strokeColor = lineColor;
       path.strokeWidth = lineWeight;
       path.dashArray = calculateDash(lineDash);
       path.moveTo(dot.position);
@@ -180,6 +184,22 @@ const DrawSection = () => {
 
   const toggleShowCircles = (event) => {
     setIsCircleShown(event.target.checked);
+  };
+
+  const handleChangeBackground = (color) => {
+    setCanvasBackground(color.hex);
+  };
+
+  const handleChangeLineColor = (color) => {
+    setLineColor(color.hex);
+  };
+
+  const handleShowLineCP = () => {
+    setLineCPVisibility(!isLineCPVisible);
+  };
+
+  const handleShowCanvasCP = () => {
+    setCanvasCPVisibility(!isCanvasCPVisible);
   };
 
   return (
@@ -288,6 +308,24 @@ const DrawSection = () => {
             className="slider"
           />
         </Label>
+
+        <ColorPickerContainer>
+          <ColorPicker
+            text="Change canvas color"
+            onClick={handleShowCanvasCP}
+            color={canvasBackground}
+            handleChangeComplete={handleChangeBackground}
+            isVisible={isCanvasCPVisible}
+          />
+
+          <ColorPicker
+            text="Change line color"
+            onClick={handleShowLineCP}
+            color={lineColor}
+            handleChangeComplete={handleChangeLineColor}
+            isVisible={isLineCPVisible}
+          />
+        </ColorPickerContainer>
 
         <SwitchContainer>
           <Text margin="1">Show spirograph</Text>
