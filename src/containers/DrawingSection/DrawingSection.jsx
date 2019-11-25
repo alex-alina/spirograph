@@ -15,16 +15,27 @@ import {
   CommandsContainer,
   WrapperContainer,
   SwitchContainer,
+  ColorPickerContainer,
 } from './DrawingSection.style';
 import Container from '../../components/Container/Container';
 import Switch from '../../components/Switch/Switch';
+import calculateDash from '../../utils/utils';
+import ColorPicker from '../ColorPicker/ColorPicker';
 
 
 const DrawSection = () => {
   let [canvasBackground, setCanvasBackground] = useState('#fff');
-  // const [lineColor, setLineColor] = useState('orange');
+  const [lineColor, setLineColor] = useState('#42a7f5');
   let [referenceCircle, setReferenceCircle] = useState(null);
   let [movingCircle, setMovingCircle] = useState(null);
+  let [lineWeight, setLineWeight] = useState(1);
+  let [lineDash, setLineDash] = useState(0);
+  let [isDisabledBegin, setDisableBegin] = useState(false);
+  let [isDisabledClear, setDisableClear] = useState(true);
+
+  // displays the color pickers - aka CP
+  let [isLineCPVisible, setLineCPVisibility] = useState(false);
+  let [isCanvasCPVisible, setCanvasCPVisibility] = useState(false);
 
   // drawing point, placed anywhere inside the moving circle
   let [dot, setDot] = useState(null);
@@ -36,7 +47,7 @@ const DrawSection = () => {
   const [R, setR] = useState(null);
 
   // moving circle's radius  / change to let
-  const [r, setSmallR] = useState(140);
+  const [r, setSmallR] = useState(230);
 
   // guide circle' center (Cx, Cy)
   // const calculateX = paper.view.bounds.width - paper.view.bounds.center.x;
@@ -48,16 +59,13 @@ const DrawSection = () => {
   // Ex: f = 1 the drawing point is on the edge/outile of the moving circle
   // Ex: f = 0.5 drawing point is halfway between the center and outline
   // const f = 0.6;
-  const [f, setF] = useState(0.1);
+  const [f, setF] = useState(0.6);
 
   //  the size of drawing step
   let [speed, setSpeed] = useState(5);
 
   // shows the reference circle and the moving circle
   let [isCircleShown, setIsCircleShown] = useState(false);
-
-  let [isDisabledBegin, setDisableBegin] = useState(false);
-  let [isDisabledClear, setDisableClear] = useState(true);
 
   useEffect(() => {
     const { window } = global;
@@ -89,7 +97,9 @@ const DrawSection = () => {
       });
 
       path = new Path();
-      path.strokeColor = '#42a7f5';
+      path.strokeColor = lineColor;
+      path.strokeWidth = lineWeight;
+      path.dashArray = calculateDash(lineDash);
       path.moveTo(dot.position);
     }
   };
@@ -162,8 +172,34 @@ const DrawSection = () => {
     setSmallR(value);
   };
 
+  const handleLineWeight = (event) => {
+    const { value } = event.target;
+    setLineWeight(value);
+  };
+
+  const handleLineDash = (event) => {
+    const { value } = event.target;
+    setLineDash(value);
+  };
+
   const toggleShowCircles = (event) => {
     setIsCircleShown(event.target.checked);
+  };
+
+  const handleChangeBackground = (color) => {
+    setCanvasBackground(color.hex);
+  };
+
+  const handleChangeLineColor = (color) => {
+    setLineColor(color.hex);
+  };
+
+  const handleShowLineCP = () => {
+    setLineCPVisibility(!isLineCPVisible);
+  };
+
+  const handleShowCanvasCP = () => {
+    setCanvasCPVisibility(!isCanvasCPVisible);
   };
 
   return (
@@ -246,6 +282,50 @@ const DrawSection = () => {
             className="slider"
           />
         </Label>
+
+        <Label htmlFor="lineWeight">
+          <Text>{`Line weight: ${lineWeight}`}</Text>
+          <Slider
+            name="lineWeight"
+            min="1"
+            max="5"
+            step="0.5"
+            value={lineWeight}
+            onChange={handleLineWeight}
+            className="slider"
+          />
+        </Label>
+
+        <Label htmlFor="lineDash">
+          <Text>{`Line dash: ${lineDash}`}</Text>
+          <Slider
+            name="lineDash"
+            min="0"
+            max="10"
+            step="1"
+            value={lineDash}
+            onChange={handleLineDash}
+            className="slider"
+          />
+        </Label>
+
+        <ColorPickerContainer>
+          <ColorPicker
+            text="Change canvas color"
+            onClick={handleShowCanvasCP}
+            color={canvasBackground}
+            handleChangeComplete={handleChangeBackground}
+            isVisible={isCanvasCPVisible}
+          />
+
+          <ColorPicker
+            text="Change line color"
+            onClick={handleShowLineCP}
+            color={lineColor}
+            handleChangeComplete={handleChangeLineColor}
+            isVisible={isLineCPVisible}
+          />
+        </ColorPickerContainer>
 
         <SwitchContainer>
           <Text margin="1">Show spirograph</Text>
