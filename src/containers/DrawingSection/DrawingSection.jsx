@@ -36,7 +36,7 @@ const DrawSection = () => {
   const [R, setR] = useState(null);
 
   // moving circle's radius  / change to let
-  const [r, setSmallR] = useState(140);
+  const [r, setSmallR] = useState(230);
 
   // guide circle' center (Cx, Cy)
   // const calculateX = paper.view.bounds.width - paper.view.bounds.center.x;
@@ -48,11 +48,12 @@ const DrawSection = () => {
   // Ex: f = 1 the drawing point is on the edge/outile of the moving circle
   // Ex: f = 0.5 drawing point is halfway between the center and outline
   // const f = 0.6;
-  const [f, setF] = useState(0.1);
+  const [f, setF] = useState(0.6);
 
   //  the size of drawing step
   let [speed, setSpeed] = useState(5);
 
+  let [lineWeight, setLineWeight] = useState(1);
   // shows the reference circle and the moving circle
   let [isCircleShown, setIsCircleShown] = useState(false);
 
@@ -90,6 +91,7 @@ const DrawSection = () => {
 
       path = new Path();
       path.strokeColor = '#42a7f5';
+      path.strokeWidth = lineWeight;
       path.moveTo(dot.position);
     }
   };
@@ -160,6 +162,11 @@ const DrawSection = () => {
   const handleMovingCircleR = (event) => {
     const { value } = event.target;
     setSmallR(value);
+  };
+
+  const handleLineWieght = (event) => {
+    const { value } = event.target;
+    setLineWeight(value);
   };
 
   const toggleShowCircles = (event) => {
@@ -243,6 +250,19 @@ const DrawSection = () => {
             step="10"
             value={r}
             onChange={handleMovingCircleR}
+            className="slider"
+          />
+        </Label>
+
+        <Label htmlFor="lineWeight">
+          <Text>{`Line weight: ${lineWeight}`}</Text>
+          <Slider
+            name="lineWeight"
+            min="1"
+            max="5"
+            step="0.5"
+            value={lineWeight}
+            onChange={handleLineWieght}
             className="slider"
           />
         </Label>

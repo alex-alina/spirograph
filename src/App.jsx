@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <Banner>
-        <H1>Spirograph Maker</H1>
+        <H1>Spirograph</H1>
       </Banner>
       <DrawingSection />
     </div>
