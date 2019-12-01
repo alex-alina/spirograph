@@ -6,7 +6,6 @@ import Label from '../../components/Label/Label';
 import Text from '../../components/Text/Text';
 import Slider from '../../components/Slider/Slider';
 import H2 from '../../components/H2/H2';
-import Container from '../../components/Container/Container';
 import Switch from '../../components/Switch/Switch';
 import calculateDash from '../../utils/utils';
 import ColorPicker from '../ColorPicker/ColorPicker';
@@ -23,6 +22,7 @@ import {
   StyledContainer,
   ColorCommandsContainer,
   MainCommandsContainer,
+  StyledHowTo,
 } from './DrawingSection.style';
 
 
@@ -58,7 +58,7 @@ const DrawSection = () => {
   //   return 230;
   // };
 
-  const [r, setSmallR] = useState(230);
+  const [r, setSmallR] = useState(130);
 
   // guide circle' center (Cx, Cy)
   // const calculateX = paper.view.bounds.width - paper.view.bounds.center.x;
@@ -89,8 +89,6 @@ const DrawSection = () => {
   const lazyInstantiate = () => {
     if (movingCircle === null) {
       movingCircle = new Path.Circle({
-        // intreaba-l pe adi de ce modificarea centrului nu are efecte
-        center: [10, 10],
         radius: r,
         strokeColor: isCircleShown ? '#999' : 'transparent',
         strokeWidth: 1,
@@ -249,10 +247,32 @@ const DrawSection = () => {
           backgroundColor={canvasBackground}
         />
       </CanvasContainer>
+
       <MainCommandsContainer>
-        <StyledContainer>
-          <H2>Change the parameters below and try a new pattern</H2>
-        </StyledContainer>
+        <H2>
+            Draw lovely circular patterns using this
+          {' '}
+          <a
+            href="https://en.wikipedia.org/wiki/Spirograph"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+              spirograph
+          </a>
+          {' '}
+            app
+        </H2>
+
+        <StyledHowTo>
+          <Text margin={0.2}>1. Click Start to draw a new pattern</Text>
+          <Text margin={0.2}>2. Click Stop when you like the outcome</Text>
+          <Text margin={0.2}>3. Click Clear Canvas before trying a new pattern</Text>
+          <Text margin={0.2}>
+            4. Repeat: play around with the commands below to try new patterns
+          </Text>
+        </StyledHowTo>
+
+        <H2>Change the parameters below and try a new pattern</H2>
         <StyledContainer>
           <CommandsContainer>
             <Label htmlFor="speed">
@@ -320,9 +340,7 @@ const DrawSection = () => {
               />
             </Label>
 
-
             <CarouselDisplay />
-
           </CommandsContainer>
 
           <ColorCommandsContainer>
@@ -343,13 +361,13 @@ const DrawSection = () => {
                 isVisible={isLineCPVisible}
               />
             </ColorPickerContainer>
+
             <SwitchContainer>
               <Text margin="1">Show spirograph</Text>
               <Switch checked={isCircleShown} onChange={toggleShowCircles} />
             </SwitchContainer>
           </ColorCommandsContainer>
         </StyledContainer>
-        {/* <CarouselDisplay /> */}
       </MainCommandsContainer>
     </WrapperContainer>
   );
