@@ -1,12 +1,16 @@
 /* eslint-disable prefer-const */
 import React, { useState, useEffect } from 'react';
 import paper, { Path } from 'paper';
-import { ChromePicker } from 'react-color';
 import Button from '../../components/Button/Button';
 import Label from '../../components/Label/Label';
 import Text from '../../components/Text/Text';
 import Slider from '../../components/Slider/Slider';
 import H2 from '../../components/H2/H2';
+import Container from '../../components/Container/Container';
+import Switch from '../../components/Switch/Switch';
+import calculateDash from '../../utils/utils';
+import ColorPicker from '../ColorPicker/ColorPicker';
+import CarouselDisplay from '../../components/CarouselDisplay/CarouselDisplay';
 
 import {
   CanvasContainer,
@@ -16,16 +20,15 @@ import {
   WrapperContainer,
   SwitchContainer,
   ColorPickerContainer,
+  StyledContainer,
+  ColorCommandsContainer,
+  MainCommandsContainer,
 } from './DrawingSection.style';
-import Container from '../../components/Container/Container';
-import Switch from '../../components/Switch/Switch';
-import calculateDash from '../../utils/utils';
-import ColorPicker from '../ColorPicker/ColorPicker';
 
 
 const DrawSection = () => {
   let [canvasBackground, setCanvasBackground] = useState('#fff');
-  const [lineColor, setLineColor] = useState('#42a7f5');
+  let [lineColor, setLineColor] = useState('#42a7f5');
   let [referenceCircle, setReferenceCircle] = useState(null);
   let [movingCircle, setMovingCircle] = useState(null);
   let [lineWeight, setLineWeight] = useState(1);
@@ -46,7 +49,15 @@ const DrawSection = () => {
   // guide circle's radius / change to let
   const [R, setR] = useState(null);
 
-  // moving circle's radius  / change to let
+  // moving circle's radius (different values based on screen size)
+  // const calculateResponsiveSmallR = () => {
+  //   if (window.screen.width < 400) {
+  //     return 70;
+  //   }
+
+  //   return 230;
+  // };
+
   const [r, setSmallR] = useState(230);
 
   // guide circle' center (Cx, Cy)
@@ -238,101 +249,108 @@ const DrawSection = () => {
           backgroundColor={canvasBackground}
         />
       </CanvasContainer>
-
-      <CommandsContainer>
-        <Container>
+      <MainCommandsContainer>
+        <StyledContainer>
           <H2>Change the parameters below and try a new pattern</H2>
-        </Container>
+        </StyledContainer>
+        <StyledContainer>
+          <CommandsContainer>
+            <Label htmlFor="speed">
+              <Text>{`Speed: ${speed}`}</Text>
+              <Slider
+                name="speed"
+                min="1"
+                max="10"
+                step="1"
+                value={speed}
+                onChange={handleSpeed}
+                className="slider"
+              />
+            </Label>
 
-        <Label htmlFor="speed">
-          <Text>{`Speed: ${speed}`}</Text>
-          <Slider
-            name="speed"
-            min="1"
-            max="10"
-            step="1"
-            value={speed}
-            onChange={handleSpeed}
-            className="slider"
-          />
-        </Label>
+            <Label htmlFor="f">
+              <Text>{`Drawing point position: ${f}`}</Text>
+              <Slider
+                name="f"
+                min="0"
+                max="1"
+                step="0.1"
+                value={f}
+                onChange={handleMovePoint}
+                className="slider"
+              />
+            </Label>
 
-        <Label htmlFor="f">
-          <Text>{`Drawing point position: ${f}`}</Text>
-          <Slider
-            name="f"
-            min="0"
-            max="1"
-            step="0.1"
-            value={f}
-            onChange={handleMovePoint}
-            className="slider"
-          />
-        </Label>
+            <Label htmlFor="r">
+              <Text>{`Radius: ${r}`}</Text>
+              <Slider
+                name="r"
+                min="50"
+                max={(R - 20).toString()}
+                step="10"
+                value={r}
+                onChange={handleMovingCircleR}
+                className="slider"
+              />
+            </Label>
 
-        <Label htmlFor="r">
-          <Text>{`Radius: ${r}`}</Text>
-          <Slider
-            name="r"
-            min="50"
-            max={(R - 20).toString()}
-            step="10"
-            value={r}
-            onChange={handleMovingCircleR}
-            className="slider"
-          />
-        </Label>
+            <Label htmlFor="lineWeight">
+              <Text>{`Line weight: ${lineWeight}`}</Text>
+              <Slider
+                name="lineWeight"
+                min="1"
+                max="5"
+                step="0.5"
+                value={lineWeight}
+                onChange={handleLineWeight}
+                className="slider"
+              />
+            </Label>
 
-        <Label htmlFor="lineWeight">
-          <Text>{`Line weight: ${lineWeight}`}</Text>
-          <Slider
-            name="lineWeight"
-            min="1"
-            max="5"
-            step="0.5"
-            value={lineWeight}
-            onChange={handleLineWeight}
-            className="slider"
-          />
-        </Label>
+            <Label htmlFor="lineDash">
+              <Text>{`Line dash: ${lineDash}`}</Text>
+              <Slider
+                name="lineDash"
+                min="0"
+                max="10"
+                step="1"
+                value={lineDash}
+                onChange={handleLineDash}
+                className="slider"
+              />
+            </Label>
 
-        <Label htmlFor="lineDash">
-          <Text>{`Line dash: ${lineDash}`}</Text>
-          <Slider
-            name="lineDash"
-            min="0"
-            max="10"
-            step="1"
-            value={lineDash}
-            onChange={handleLineDash}
-            className="slider"
-          />
-        </Label>
 
-        <ColorPickerContainer>
-          <ColorPicker
-            text="Change canvas color"
-            onClick={handleShowCanvasCP}
-            color={canvasBackground}
-            handleChangeComplete={handleChangeBackground}
-            isVisible={isCanvasCPVisible}
-          />
+            <CarouselDisplay />
 
-          <ColorPicker
-            text="Change line color"
-            onClick={handleShowLineCP}
-            color={lineColor}
-            handleChangeComplete={handleChangeLineColor}
-            isVisible={isLineCPVisible}
-          />
-        </ColorPickerContainer>
+          </CommandsContainer>
 
-        <SwitchContainer>
-          <Text margin="1">Show spirograph</Text>
-          <Switch checked={isCircleShown} onChange={toggleShowCircles} />
-        </SwitchContainer>
+          <ColorCommandsContainer>
+            <ColorPickerContainer>
+              <ColorPicker
+                text="Change canvas color"
+                onClick={handleShowCanvasCP}
+                color={canvasBackground}
+                handleChangeComplete={handleChangeBackground}
+                isVisible={isCanvasCPVisible}
+              />
 
-      </CommandsContainer>
+              <ColorPicker
+                text="Change line color"
+                onClick={handleShowLineCP}
+                color={lineColor}
+                handleChangeComplete={handleChangeLineColor}
+                isVisible={isLineCPVisible}
+              />
+            </ColorPickerContainer>
+            <SwitchContainer>
+              <Text margin="1">Show spirograph</Text>
+              <Switch checked={isCircleShown} onChange={toggleShowCircles} />
+            </SwitchContainer>
+          </ColorCommandsContainer>
+        </StyledContainer>
+        {/* <CarouselDisplay /> */}
+      </MainCommandsContainer>
     </WrapperContainer>
   );
 };

@@ -1,0 +1,32 @@
+import React from 'react';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Carousel } from 'react-responsive-carousel';
+import patternImages from '../../assets/index';
+import StyledContainer from './CarouselDisplay.style';
+
+
+export default function CarouselDisplay(props) {
+  return (
+    <StyledContainer>
+      <Carousel
+        autoPlay
+        width="300px"
+        interval={2000}
+        transitionTime={1000}
+        dynamicHeight
+        showThumbs={false}
+        showStatus={false}
+      // infiniteLoop
+        centerMode
+        centerSlidePercentage={100}
+      >
+        {patternImages.map((img, index) => (
+          <div>
+            <img src={patternImages[index]} alt={`Spirograph pattern ${index + 1}`} />
+          </div>
+        ))}
+      </Carousel>
+    </StyledContainer>
+
+  );
+}
