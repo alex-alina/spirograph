@@ -30,12 +30,25 @@ export const ButtonsContainer = style(Container)`
   }
 `;
 
+export const StyledHowTo = style.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5%
+  margin: 1% auto 2% auto;
+  border: 0.5px solid #2fa4ed;
+  box-shadow: 
+    0 0  0 2px rgb(255, 255, 255),
+    0.1em 0.1em 1em rgba(0, 0, 0, 0.1);
+`;
+
 export const MainCommandsContainer = style.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
   width: 100%;
+  margin-top: 2%;
 
   @media(min-width: 1254px) {
       width: 40%;
@@ -72,6 +85,10 @@ export const CanvasContainer = style(Container)`
   align-content: center;
   overflow-x: hidden;
   margin: 0 auto;
+
+  @media(min-width: 1254px) {
+    margin: 0;
+ }
 `;
 
 export const StyledCanvas = style.canvas`
@@ -101,10 +118,6 @@ export const SwitchContainer = style.div`
   justify-content: center;
   align-content: center;
   align-items: center;
-
-  @media(min-width: 1254px) {
-    // margin-top: 50vh;
-  }
 `;
 
 export const ColorPickerContainer = style.div`
@@ -113,7 +126,7 @@ export const ColorPickerContainer = style.div`
   justify-content: center;
   align-content: center;
   align-items: center;
-  margin: 3% 0 1% 0;
+  margin: 0 0 1% 0;
 `;
 
 export const StyledContainer = style.div`
@@ -121,7 +134,6 @@ export const StyledContainer = style.div`
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  margin: 3% 0 1% 0;
 
   @media(min-width: 1254px) {
     flex-direction: row;

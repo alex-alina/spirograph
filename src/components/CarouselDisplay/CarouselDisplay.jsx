@@ -1,7 +1,7 @@
 import React from 'react';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
-import patternImages from '../../assets/index';
+import patternImages from '../../assets/images/index';
 import StyledContainer from './CarouselDisplay.style';
 
 
@@ -10,13 +10,12 @@ export default function CarouselDisplay(props) {
     <StyledContainer>
       <Carousel
         autoPlay
-        width="300px"
+        width="260px"
         interval={2000}
         transitionTime={1000}
         dynamicHeight
         showThumbs={false}
         showStatus={false}
-      // infiniteLoop
         centerMode
         centerSlidePercentage={100}
       >

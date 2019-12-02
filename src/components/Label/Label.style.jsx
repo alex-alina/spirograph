@@ -35,7 +35,7 @@ const StyledLabel = styled.label`
     width: 80%;
     
     div {
-      margin-right: 20px;
+      margin-right: 15px;
       padding: 0;
       flex: 3;
     }

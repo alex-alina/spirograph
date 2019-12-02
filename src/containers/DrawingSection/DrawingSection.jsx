@@ -1,16 +1,16 @@
 /* eslint-disable prefer-const */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import paper, { Path } from 'paper';
 import Button from '../../components/Button/Button';
 import Label from '../../components/Label/Label';
 import Text from '../../components/Text/Text';
 import Slider from '../../components/Slider/Slider';
 import H2 from '../../components/H2/H2';
-import Container from '../../components/Container/Container';
 import Switch from '../../components/Switch/Switch';
 import calculateDash from '../../utils/utils';
 import ColorPicker from '../ColorPicker/ColorPicker';
 import CarouselDisplay from '../../components/CarouselDisplay/CarouselDisplay';
+import HowToSection from '../../components/HowToSection/HowToSection';
 
 import {
   CanvasContainer,
@@ -25,20 +25,52 @@ import {
   MainCommandsContainer,
 } from './DrawingSection.style';
 
+// will set moving circle's radius value based on screen size
+const calculateResponsiveSmallR = () => {
+  if (global.window.screen.width < 400) {
+    return 70;
+  }
+
+  return 230;
+};
 
 const DrawSection = () => {
+  // because: https://github.com/facebook/react/issues/14010
+  let refState = useRef(
+    {
+      lineColor: '#42a7f5',
+      lineWeight: 1,
+      lineDash: 0,
+      isCircleShown: false,
+    },
+  );
+
   let [canvasBackground, setCanvasBackground] = useState('#fff');
   let [lineColor, setLineColor] = useState('#42a7f5');
-  let [referenceCircle, setReferenceCircle] = useState(null);
-  let [movingCircle, setMovingCircle] = useState(null);
   let [lineWeight, setLineWeight] = useState(1);
   let [lineDash, setLineDash] = useState(0);
-  let [isDisabledBegin, setDisableBegin] = useState(false);
-  let [isDisabledClear, setDisableClear] = useState(true);
 
-  // displays the color pickers - aka CP
-  let [isLineCPVisible, setLineCPVisibility] = useState(false);
-  let [isCanvasCPVisible, setCanvasCPVisibility] = useState(false);
+  let [referenceCircle, setReferenceCircle] = useState(null);
+  let [movingCircle, setMovingCircle] = useState(null);
+
+  // reference aka guide circle's center (Cx, Cy)
+  let [Cx, setCx] = useState(null);
+  let [Cy, setCy] = useState(null);
+
+  // guide circle's radius
+  const [R, setR] = useState(null);
+
+  //  moving circle's radius
+  const [r, setSmallR] = useState(calculateResponsiveSmallR());
+
+  // fraction of the moving circle's radius where the drawing point is placed
+  // Ex: f = 0 the drawing point is in the center of the moving circle
+  // Ex: f = 1 the drawing point is on the edge/outile of the moving circle
+  // Ex: f = 0.5 drawing point is halfway between the center and outline
+  const [f, setF] = useState(0.6);
+
+  //  the size of drawing step
+  let [speed, setSpeed] = useState(5);
 
   // drawing point, placed anywhere inside the moving circle
   let [dot, setDot] = useState(null);
@@ -46,36 +78,14 @@ const DrawSection = () => {
   // line segments that get drawed
   let [path, setPath] = useState(null);
 
-  // guide circle's radius / change to let
-  const [R, setR] = useState(null);
+  let [isDisabledBegin, setDisableBegin] = useState(false);
+  let [isDisabledClear, setDisableClear] = useState(true);
 
-  // moving circle's radius (different values based on screen size)
-  // const calculateResponsiveSmallR = () => {
-  //   if (window.screen.width < 400) {
-  //     return 70;
-  //   }
+  // displays the color pickers - aka CP
+  let [isLineCPVisible, setLineCPVisibility] = useState(false);
+  let [isCanvasCPVisible, setCanvasCPVisibility] = useState(false);
 
-  //   return 230;
-  // };
-
-  const [r, setSmallR] = useState(230);
-
-  // guide circle' center (Cx, Cy)
-  // const calculateX = paper.view.bounds.width - paper.view.bounds.center.x;
-  let [Cx, setCx] = useState(null);
-  let [Cy, setCy] = useState(null);
-
-  // fraction of the moving circle's radius where the drawing point is placed
-  // Ex: f = 0 the drawing point is in the center of the moving circle
-  // Ex: f = 1 the drawing point is on the edge/outile of the moving circle
-  // Ex: f = 0.5 drawing point is halfway between the center and outline
-  // const f = 0.6;
-  const [f, setF] = useState(0.6);
-
-  //  the size of drawing step
-  let [speed, setSpeed] = useState(5);
-
-  // shows the reference circle and the moving circle
+  // shows the reference circle and the moving circle (the spirograph mechanism)
   let [isCircleShown, setIsCircleShown] = useState(false);
 
   useEffect(() => {
@@ -85,20 +95,29 @@ const DrawSection = () => {
     paper.setup('myCanvas');
   }, []);
 
+  useEffect(() => {
+    const calculateR = Math.round(paper.view.bounds.width - paper.view.bounds.center.x);
+    const calculateCx = paper.view.bounds.center.x;
+    const calculateCy = paper.view.bounds.center.y;
+
+    setR(calculateR);
+    setCx(calculateCx);
+    setCy(calculateCy);
+  }, [Cx, Cy, R]);
+
   // all objects in the functions below are instantiated once
   const lazyInstantiate = () => {
     if (movingCircle === null) {
       movingCircle = new Path.Circle({
-        // intreaba-l pe adi de ce modificarea centrului nu are efecte
-        center: [10, 10],
         radius: r,
-        strokeColor: isCircleShown ? '#999' : 'transparent',
+        strokeColor: refState.current.isCircleShown ? '#999' : 'transparent',
         strokeWidth: 1,
       });
 
       referenceCircle = new Path.Circle(paper.view.bounds.center, R);
-      referenceCircle.strokeColor = isCircleShown ? '#999' : 'transparent';
+      referenceCircle.strokeColor = refState.current.isCircleShown ? '#999' : 'transparent';
       referenceCircle.strokeWidth = 1;
+
       const dotCenterX = Cx + R - r * (1 - f);
 
       dot = new Path.Circle({
@@ -108,17 +127,26 @@ const DrawSection = () => {
       });
 
       path = new Path();
-      path.strokeColor = lineColor;
-      path.strokeWidth = lineWeight;
-      path.dashArray = calculateDash(lineDash);
+      path.strokeColor = refState.current.lineColor;
+      path.strokeWidth = refState.current.lineWeight;
+      path.dashArray = calculateDash(refState.current.lineDash);
       path.moveTo(dot.position);
     }
+  };
+
+  const updateLineStylesFromRef = () => {
+    path.strokeColor = refState.current.lineColor;
+    path.strokeWidth = refState.current.lineWeight;
+    path.dashArray = calculateDash(refState.current.lineDash);
+    referenceCircle.strokeColor = refState.current.isCircleShown ? '#999' : 'transparent';
+    movingCircle.strokeColor = refState.current.isCircleShown ? '#999' : 'transparent';
   };
 
   // draw() -> callback called every time a frame needs to be drawn by paperjs
   // @param event (paper.js replaces it with an 'event' argument that has multiple methods)
   const draw = (event) => {
     lazyInstantiate();
+    updateLineStylesFromRef();
 
     paper.view.onResize = () => {
       referenceCircle.position = paper.view.center;
@@ -140,16 +168,6 @@ const DrawSection = () => {
     dot.position.x = pX;
     dot.position.y = pY;
   };
-
-  useEffect(() => {
-    const calculateR = Math.round(paper.view.bounds.width - paper.view.bounds.center.x);
-    const calculateCx = paper.view.bounds.center.x;
-    const calculateCy = paper.view.bounds.center.y;
-
-    setR(calculateR);
-    setCx(calculateCx);
-    setCy(calculateCy);
-  }, [Cx, Cy, R]);
 
   const handleStart = () => {
     paper.view.onFrame = draw;
@@ -173,7 +191,7 @@ const DrawSection = () => {
     setSpeed(value);
   };
 
-  const handleMovePoint = (event) => {
+  const handleDrawingPoint = (event) => {
     const { value } = event.target;
     setF(value);
   };
@@ -186,15 +204,19 @@ const DrawSection = () => {
   const handleLineWeight = (event) => {
     const { value } = event.target;
     setLineWeight(value);
+    refState.current.lineWeight = value;
   };
 
   const handleLineDash = (event) => {
     const { value } = event.target;
     setLineDash(value);
+    refState.current.lineDash = value;
   };
 
   const toggleShowCircles = (event) => {
-    setIsCircleShown(event.target.checked);
+    const isVisible = event.target.checked;
+    setIsCircleShown(isVisible);
+    refState.current.isCircleShown = isVisible;
   };
 
   const handleChangeBackground = (color) => {
@@ -202,7 +224,9 @@ const DrawSection = () => {
   };
 
   const handleChangeLineColor = (color) => {
-    setLineColor(color.hex);
+    const newColor = color.hex;
+    setLineColor(newColor);
+    refState.current.lineColor = newColor;
   };
 
   const handleShowLineCP = () => {
@@ -249,10 +273,11 @@ const DrawSection = () => {
           backgroundColor={canvasBackground}
         />
       </CanvasContainer>
+
       <MainCommandsContainer>
-        <StyledContainer>
-          <H2>Change the parameters below and try a new pattern</H2>
-        </StyledContainer>
+        <HowToSection />
+
+        <H2>Change the parameters below and try a new pattern</H2>
         <StyledContainer>
           <CommandsContainer>
             <Label htmlFor="speed">
@@ -276,7 +301,7 @@ const DrawSection = () => {
                 max="1"
                 step="0.1"
                 value={f}
-                onChange={handleMovePoint}
+                onChange={handleDrawingPoint}
                 className="slider"
               />
             </Label>
@@ -320,9 +345,7 @@ const DrawSection = () => {
               />
             </Label>
 
-
             <CarouselDisplay />
-
           </CommandsContainer>
 
           <ColorCommandsContainer>
@@ -343,13 +366,13 @@ const DrawSection = () => {
                 isVisible={isLineCPVisible}
               />
             </ColorPickerContainer>
+
             <SwitchContainer>
               <Text margin="1">Show spirograph</Text>
               <Switch checked={isCircleShown} onChange={toggleShowCircles} />
             </SwitchContainer>
           </ColorCommandsContainer>
         </StyledContainer>
-        {/* <CarouselDisplay /> */}
       </MainCommandsContainer>
     </WrapperContainer>
   );

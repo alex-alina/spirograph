@@ -7,9 +7,7 @@ import six from './six.png';
 import seven from './seven.png';
 import eight from './eight.png';
 import nine from './nine.png';
-import ten from './ten.png';
 
-const patternImages = [one, two, three, four, five, six, seven, eight, nine, ten];
-// export one;
-// export two;
+const patternImages = [one, two, three, four, five, six, seven, eight, nine];
+
 export default patternImages;
