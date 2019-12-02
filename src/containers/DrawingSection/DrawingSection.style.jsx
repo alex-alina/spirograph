@@ -10,7 +10,7 @@ export const WrapperContainer = style(Container)`
   justify-content: space-around;
   align-items: flex-start;
   width: 100%;
-  margin-top: 130px;
+  margin-top: 100px;
   overflow-x: hidden;
   
   @media(min-width: 1254px) {
