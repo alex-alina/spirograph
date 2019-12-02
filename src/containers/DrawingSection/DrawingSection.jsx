@@ -10,6 +10,7 @@ import Switch from '../../components/Switch/Switch';
 import calculateDash from '../../utils/utils';
 import ColorPicker from '../ColorPicker/ColorPicker';
 import CarouselDisplay from '../../components/CarouselDisplay/CarouselDisplay';
+import HowToSection from '../../components/HowToSection/HowToSection';
 
 import {
   CanvasContainer,
@@ -22,7 +23,6 @@ import {
   StyledContainer,
   ColorCommandsContainer,
   MainCommandsContainer,
-  StyledHowTo,
 } from './DrawingSection.style';
 
 // will set moving circle's radius value based on screen size
@@ -275,26 +275,7 @@ const DrawSection = () => {
       </CanvasContainer>
 
       <MainCommandsContainer>
-        <H2>
-          Draw lovely circular patterns using this
-          <a
-            href="https://en.wikipedia.org/wiki/Spirograph"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            spirograph
-          </a>
-          app
-        </H2>
-
-        <StyledHowTo>
-          <Text margin={0.2}>1. Click Start to draw a new pattern</Text>
-          <Text margin={0.2}>2. Click Stop when you like the outcome</Text>
-          <Text margin={0.2}>3. Click Clear Canvas before trying a new pattern</Text>
-          <Text margin={0.2}>
-            4. Repeat: play around with the commands below to try new patterns
-          </Text>
-        </StyledHowTo>
+        <HowToSection />
 
         <H2>Change the parameters below and try a new pattern</H2>
         <StyledContainer>

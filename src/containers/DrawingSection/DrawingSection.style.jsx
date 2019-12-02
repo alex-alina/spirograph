@@ -118,10 +118,6 @@ export const SwitchContainer = style.div`
   justify-content: center;
   align-content: center;
   align-items: center;
-
-  @media(min-width: 1254px) {
-    // margin-top: 50vh;
-  }
 `;
 
 export const ColorPickerContainer = style.div`
@@ -130,7 +126,7 @@ export const ColorPickerContainer = style.div`
   justify-content: center;
   align-content: center;
   align-items: center;
-  margin: 3% 0 1% 0;
+  margin: 0 0 1% 0;
 `;
 
 export const StyledContainer = style.div`
