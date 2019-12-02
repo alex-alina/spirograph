@@ -1,68 +1,60 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+## Spirograph App
 
-### `yarn start`
+## [Demo](https://frosty-raman-e9f7d7.netlify.com/)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Quick view
+![](readme-img.png)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Description
 
-### `yarn test`
+This is a drawing app that makes mathematical roulette curves and draws circular patterns. You can learn about spirographs [here ](https://en.wikipedia.org/wiki/Spirograph)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tech stack
 
-### `yarn build`
+* React (hooks)
+* JavaScript
+* Paper.js
+* Jest
+* styled-components
+* CSS
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Features
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+* Canvas 
+* Buttons for drawing pattern(s) and clearing the canvas
+* Sliders that change several parameters to output different patterns
+  * Speed - changes the size of drawing step
+  * Drawing point - changes the position of the drawing point inside the moving circle.
+  * Radius - changes the radius of the moving circle
+  * Line wight
+  * Line dash
+* Color Pickers - to change the canvas color and line color
+* Switch - to show the mechanism that is generating the drawing
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Setup
 
-### `yarn eject`
+* Clone the repository `git@github.com:alex-alina/spirograph.git`
+* Install the dependencies using `yarn install`
+* Start the server using `yarn start`
+* Run the tests using `yarn test`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Future development and improvements
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* Refactor the Container component and make it more flexible to use with props, to dry the code base by removing the custom containers. 
+* Split DrawSection container into seperate smaller containers.
+* Improve font sizes and positioning for Firefox.
+* Add a random patterns generator.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Motivation
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+I wanted to practice with and learn:
+* How to use Paper.js framework with React and JS.
+* Writing fron end tests with Enzyme and Jest.
+* Practicing more with styled-components. 
+* Using libraries to implement color pickers and a carousel.
 
-## Learn More
+## License
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+MIT Licence - Copyright &copy; 2019 - Alina Rusu.
