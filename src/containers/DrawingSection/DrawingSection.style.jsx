@@ -149,5 +149,4 @@ export const StyledText = style.div`
   font-size: 1.1em;
   font-style: italic;
   color: #2fa4ed;
-  
 `;
