@@ -17,7 +17,8 @@ export default function H2(props) {
 }
 
 H2.propTypes = {
-  children: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  children: PropTypes.any.isRequired,
   center: PropTypes.bool,
   margin: PropTypes.string,
 };

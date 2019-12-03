@@ -51,7 +51,7 @@ export const MainCommandsContainer = style.div`
   margin-top: 2%;
 
   @media(min-width: 1254px) {
-      width: 40%;
+    width: 40%;
   }
 `;
 
@@ -75,7 +75,7 @@ export const ColorCommandsContainer = style(Container)`
 
   @media(min-width: 1254px) {
     width: 40%;
- }
+  }
 `;
 
 export const CanvasContainer = style(Container)`
@@ -88,24 +88,25 @@ export const CanvasContainer = style(Container)`
 
   @media(min-width: 1254px) {
     margin: 0;
- }
+  }
 `;
 
 export const StyledCanvas = style.canvas`
+  width: 95vw;
+  height: 95vw;
+  margin: 0 auto;
   border: 1px solid transparent;
   background-color: ${(props) => props.backgroundColor};
 
   box-shadow: 
     0 0  0 2px rgb(255, 255, 255),
     0.1em 0.1em 1em rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
-  width: 95vw;
-  height: 95vw;
 
   @media(min-width: 1000px) {
     width: 65vh;
     height: 65vh;
   }
+  
   @media(min-width: 1254px) {
     width: 75vh;
     height: 75vh;

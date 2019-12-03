@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/forbid-prop-types */
+import React from 'react';
 import { ChromePicker } from 'react-color';
 import PropTypes from 'prop-types';
-import Button from '../../components/Button/Button';
 import { StyledColorPicker, StyledButton } from './ColorPicker.style';
 
 export default function ColorPicker(props) {
@@ -15,11 +15,10 @@ export default function ColorPicker(props) {
 
   return (
     <StyledColorPicker>
-      <StyledButton
-        onClick={onClick}
-      >
+      <StyledButton onClick={onClick}>
         {text}
       </StyledButton>
+
       {isVisible
         ? (
           <ChromePicker
@@ -30,7 +29,6 @@ export default function ColorPicker(props) {
         )
         : null}
     </StyledColorPicker>
-
   );
 }
 
@@ -38,7 +36,6 @@ ColorPicker.propTypes = {
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   handleChangeComplete: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
   color: PropTypes.any.isRequired,
   isVisible: PropTypes.bool.isRequired,
 };

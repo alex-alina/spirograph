@@ -1,7 +1,7 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 import StyledContainer from './Container.style';
-
 
 export default function Container(props) {
   const {
@@ -9,13 +9,9 @@ export default function Container(props) {
   } = props;
 
   return (
-    <StyledContainer
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
-    >
+    <StyledContainer {...props}>
       {children}
     </StyledContainer>
-
   );
 }
 

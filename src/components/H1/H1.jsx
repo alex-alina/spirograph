@@ -7,9 +7,7 @@ export default function H1(props) {
   const { children, margin } = props;
 
   return (
-    <StyledH1
-      margin={margin}
-    >
+    <StyledH1 margin={margin}>
       {children}
     </StyledH1>
   );

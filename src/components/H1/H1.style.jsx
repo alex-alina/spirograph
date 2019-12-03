@@ -9,7 +9,6 @@ const StyledH1 = styled.div`
   text-align: center;
   line-height: 1;
   font-style: italic;
-  // margin-top: 1.3em;
 
   ${(props) => (props.margin ? css`
   margin: ${props.margin}em auto;

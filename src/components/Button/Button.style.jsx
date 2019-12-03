@@ -10,15 +10,15 @@ const StyledButton = styled.button`
   height: 36px;
   font-size: 0.8em;
   line-height: 1.5;
-  margin:  0.5em;
+  margin: 0.5em;
   padding: 2em, 4em;
   border-radius: 50px;
-  outline:none;
+  outline: none;
   
   @media(min-width: 700px) {
     font-size: 1.2em;
     min-width: 140px;
-    margin:  2em 1em 1em 1em;
+    margin: 2em 1em 1em 1em;
   }
   
   &::-moz-focus-inner {
@@ -48,6 +48,7 @@ const StyledButton = styled.button`
 
   border: ${(props) => {
     let borderColor = '#42a5f5';
+
     if (props.primary) borderColor = '#2fa4ed';
     if (props.secondary) borderColor = '#fca103';
     if (props.disabled) borderColor = '#999';

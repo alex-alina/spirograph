@@ -4,13 +4,12 @@ import { Carousel } from 'react-responsive-carousel';
 import patternImages from '../../assets/images/index';
 import StyledContainer from './CarouselDisplay.style';
 
-
 export default function CarouselDisplay(props) {
   return (
     <StyledContainer>
       <Carousel
         autoPlay
-        width="260px"
+        width="270px"
         interval={2000}
         transitionTime={1000}
         dynamicHeight
@@ -19,13 +18,19 @@ export default function CarouselDisplay(props) {
         centerMode
         centerSlidePercentage={100}
       >
-        {patternImages.map((img, index) => (
-          <div>
-            <img src={patternImages[index]} alt={`Spirograph pattern ${index + 1}`} />
-          </div>
-        ))}
+        {patternImages.map((img, index) => {
+          const i = index;
+
+          return (
+            <div key={i}>
+              <img
+                src={patternImages[index]}
+                alt={`Spirograph pattern number ${index + 1}`}
+              />
+            </div>
+          );
+        })}
       </Carousel>
     </StyledContainer>
-
   );
 }

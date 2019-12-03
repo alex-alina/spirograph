@@ -13,13 +13,12 @@ export const StyledHowTo = style.div`
   @media(min-width: 700px) {
     width: 65%;
   }
+  
   @media(min-width: 1200px) {
     width: 75%;
   }
-
 `;
 
 export const StyledLink = style.a`
-color: #2fa4ed;
-
+  color: #2fa4ed;
 `;

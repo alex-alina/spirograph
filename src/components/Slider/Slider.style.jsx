@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-// eslint-disable-next-line import/no-cycle
-import Slider from './Slider';
 
 const StyledSlider = styled.input.attrs(({ inputType }) => ({
   type: inputType || 'range',

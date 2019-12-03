@@ -31,6 +31,7 @@ const StyledLabel = styled.label`
       flex: 3;
     }
   }
+
   @media(min-width: 1245px) {
     width: 80%;
     
@@ -44,6 +45,5 @@ const StyledLabel = styled.label`
     }
   }
 `;
-
 
 export default StyledLabel;
