@@ -23,6 +23,7 @@ import {
   StyledContainer,
   ColorCommandsContainer,
   MainCommandsContainer,
+  StyledText,
 } from './DrawingSection.style';
 
 // will set moving circle's radius value based on screen size
@@ -274,49 +275,11 @@ const DrawSection = () => {
       <MainCommandsContainer>
         <HowToSection />
 
-        <H2>Change the parameters below and try a new pattern</H2>
+        <H2 margin="0.5">Change the parameters below and try a new pattern</H2>
+        <StyledText>*Changes affect next drawing only.</StyledText>
 
         <StyledContainer>
           <CommandsContainer>
-            <Label htmlFor="speed">
-              <Text>{`Speed: ${speed}`}</Text>
-              <Slider
-                name="speed"
-                min="1"
-                max="10"
-                step="1"
-                value={speed}
-                onChange={handleSpeed}
-                className="slider"
-              />
-            </Label>
-
-            <Label htmlFor="f">
-              <Text>{`Drawing point position: ${f}`}</Text>
-              <Slider
-                name="f"
-                min="0"
-                max="1"
-                step="0.1"
-                value={f}
-                onChange={handleDrawingPoint}
-                className="slider"
-              />
-            </Label>
-
-            <Label htmlFor="r">
-              <Text>{`Radius: ${r}`}</Text>
-              <Slider
-                name="r"
-                min="50"
-                max={(R - 20).toString()}
-                step="10"
-                value={r}
-                onChange={handleMovingCircleR}
-                className="slider"
-              />
-            </Label>
-
             <Label htmlFor="lineWeight">
               <Text>{`Line weight: ${lineWeight}`}</Text>
               <Slider
@@ -339,6 +302,45 @@ const DrawSection = () => {
                 step="1"
                 value={lineDash}
                 onChange={handleLineDash}
+                className="slider"
+              />
+            </Label>
+
+            <Label htmlFor="speed">
+              <Text>{`*Speed: ${speed}`}</Text>
+              <Slider
+                name="speed"
+                min="1"
+                max="10"
+                step="1"
+                value={speed}
+                onChange={handleSpeed}
+                className="slider"
+              />
+            </Label>
+
+            <Label htmlFor="f">
+              <Text>{`*Drawing point: ${f}`}</Text>
+              <Slider
+                name="f"
+                min="0"
+                max="1"
+                step="0.1"
+                value={f}
+                onChange={handleDrawingPoint}
+                className="slider"
+              />
+            </Label>
+
+            <Label htmlFor="r">
+              <Text>{`*Radius: ${r}`}</Text>
+              <Slider
+                name="r"
+                min="50"
+                max={(R - 20).toString()}
+                step="10"
+                value={r}
+                onChange={handleMovingCircleR}
                 className="slider"
               />
             </Label>

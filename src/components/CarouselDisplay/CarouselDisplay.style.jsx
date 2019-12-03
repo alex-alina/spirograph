@@ -5,7 +5,7 @@ const StyledContainer = style.div`
   
   @media(min-width: 1254px) {
     display: block;
-    margin: 40px auto 0 auto;
+    margin: 30px auto 0 auto;
   }
 `;
 

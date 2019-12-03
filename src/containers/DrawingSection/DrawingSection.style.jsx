@@ -1,5 +1,6 @@
 import style from 'styled-components';
 import Container from '../../components/Container/Container';
+import Text from '../../components/Text/Text';
 
 export const WrapperContainer = style(Container)`
   box-sizing: border-box;
@@ -10,7 +11,7 @@ export const WrapperContainer = style(Container)`
   justify-content: space-around;
   align-items: flex-start;
   width: 100%;
-  margin-top: 100px;
+  margin-top: 110px;
   overflow-x: hidden;
   
   @media(min-width: 1254px) {
@@ -23,7 +24,7 @@ export const ButtonsContainer = style(Container)`
   display: flex;
   justify-content: flex-start; 
   padding: 0;
-  margin-bottom: 1em; 
+  margin-bottom: 0.5em; 
   
   @media(min-width: 700px) {
     justify-content: space-around;
@@ -48,7 +49,7 @@ export const MainCommandsContainer = style.div`
   justify-content: center;
   align-content: center;
   width: 100%;
-  margin-top: 2%;
+  margin-top: 1%;
 
   @media(min-width: 1254px) {
     width: 40%;
@@ -140,4 +141,13 @@ export const StyledContainer = style.div`
     flex-direction: row;
     justify-content: space-bewteen;
   }
+`;
+
+export const StyledText = style.div`
+  margin: 0 auto 1.5em auto;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1em;
+  font-style: italic;
+  color: #2fa4ed;
+  
 `;

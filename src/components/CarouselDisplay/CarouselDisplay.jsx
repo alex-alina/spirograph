@@ -9,7 +9,7 @@ export default function CarouselDisplay(props) {
     <StyledContainer>
       <Carousel
         autoPlay
-        width="270px"
+        width="260px"
         interval={2000}
         transitionTime={1000}
         dynamicHeight
