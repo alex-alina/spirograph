@@ -17,9 +17,10 @@ export const StyledInput = styled.input.attrs(
   position: absolute;
   width: 10px;
   height: 10px;
-  outline:none;
+  outline: none;
   opacity: 0;
 `;
+
 export const StyledSwitchBody = styled.div`
   width: 70px;
   height: 26px;
@@ -43,12 +44,14 @@ export const StyledSwitchBtn = styled.div`
   ${(props) => (props.checked === false ? css`
     float: left;
     margin: 4px 0 6px 4px;
+    
     @media(min-width: 1254px) {
       margin: 3px 0 6px 4px;
     }
     ` : css`
     float: right;
     margin: 4px 4px 6px 0;
+
     @media(min-width: 1254px) {
       margin: 3px 4px 6px 0;
     }

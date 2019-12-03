@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import StyledH1 from './H1.style';
 
 export default function H1(props) {
-  const { children } = props;
+  const { children, margin } = props;
 
   return (
-    <StyledH1>
+    <StyledH1 margin={margin}>
       {children}
     </StyledH1>
   );
@@ -15,4 +15,5 @@ export default function H1(props) {
 
 H1.propTypes = {
   children: PropTypes.string.isRequired,
+  margin: PropTypes.string,
 };

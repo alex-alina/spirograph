@@ -50,8 +50,8 @@ const DrawSection = () => {
   let [lineWeight, setLineWeight] = useState(1);
   let [lineDash, setLineDash] = useState(0);
 
-  let [referenceCircle, setReferenceCircle] = useState(null);
-  let [movingCircle, setMovingCircle] = useState(null);
+  let [referenceCircle] = useState(null);
+  let [movingCircle] = useState(null);
 
   // reference aka guide circle's center (Cx, Cy)
   let [Cx, setCx] = useState(null);
@@ -60,7 +60,7 @@ const DrawSection = () => {
   // guide circle's radius
   const [R, setR] = useState(null);
 
-  //  moving circle's radius
+  // moving circle's radius
   const [r, setSmallR] = useState(calculateResponsiveSmallR());
 
   // fraction of the moving circle's radius where the drawing point is placed
@@ -69,7 +69,7 @@ const DrawSection = () => {
   // Ex: f = 0.5 drawing point is halfway between the center and outline
   const [f, setF] = useState(0.6);
 
-  //  the size of drawing step
+  // the size of drawing step
   let [speed, setSpeed] = useState(5);
 
   // drawing point, placed anywhere inside the moving circle
@@ -142,7 +142,7 @@ const DrawSection = () => {
     movingCircle.strokeColor = refState.current.isCircleShown ? '#999' : 'transparent';
   };
 
-  // draw() -> callback called every time a frame needs to be drawn by paperjs
+  // draw() -> callback called every time a frame needs to be drawn by paper.js
   // @param event (paper.js replaces it with an 'event' argument that has multiple methods)
   const draw = (event) => {
     lazyInstantiate();
@@ -242,28 +242,25 @@ const DrawSection = () => {
       <CanvasContainer>
         <ButtonsContainer>
           <Button
-            type="button"
             onClick={handleStart}
             primary
             disabled={isDisabledBegin}
           >
-        Start Drawing
+            Start Drawing
           </Button>
 
           <Button
-            type="button"
             onClick={handleStop}
             secondary
           >
-        Stop Drawig
+            Stop Drawig
           </Button>
 
           <Button
-            type="button"
             onClick={handleClear}
             disabled={isDisabledClear}
           >
-        Clear Canvas
+            Clear Canvas
           </Button>
         </ButtonsContainer>
 
@@ -278,6 +275,7 @@ const DrawSection = () => {
         <HowToSection />
 
         <H2>Change the parameters below and try a new pattern</H2>
+
         <StyledContainer>
           <CommandsContainer>
             <Label htmlFor="speed">
