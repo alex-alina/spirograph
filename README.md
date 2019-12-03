@@ -7,7 +7,7 @@
 
 ## Description
 
-This is a drawing app that makes mathematical roulette curves and draws circular patterns. You can learn about spirographs [here ](https://en.wikipedia.org/wiki/Spirograph)
+This is a drawing app that makes mathematical roulette curves and draws circular patterns. You can learn about spirographs [here. ](https://en.wikipedia.org/wiki/Spirograph)
 
 ## Tech stack
 
