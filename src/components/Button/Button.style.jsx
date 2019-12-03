@@ -18,7 +18,7 @@ const StyledButton = styled.button`
   @media(min-width: 700px) {
     font-size: 1.2em;
     min-width: 140px;
-    margin: 2em 1em 1em 1em;
+    margin: 1em 1em 1em 1em;
   }
   
   &::-moz-focus-inner {
