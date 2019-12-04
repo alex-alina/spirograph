@@ -23,7 +23,7 @@ export const StyledInput = styled.input.attrs(
 
 export const StyledSwitchBody = styled.div`
   width: 70px;
-  height: 26px;
+  height: 25px;
   border: 2px solid #fff;
   border-radius: 999px;
 

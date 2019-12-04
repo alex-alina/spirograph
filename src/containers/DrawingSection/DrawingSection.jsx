@@ -319,19 +319,6 @@ const DrawSection = () => {
               />
             </Label>
 
-            <Label htmlFor="f">
-              <Text>{`*Drawing point: ${f}`}</Text>
-              <Slider
-                name="f"
-                min="0"
-                max="1"
-                step="0.1"
-                value={f}
-                onChange={handleDrawingPoint}
-                className="slider"
-              />
-            </Label>
-
             <Label htmlFor="r">
               <Text>{`*Radius: ${r}`}</Text>
               <Slider
@@ -341,6 +328,19 @@ const DrawSection = () => {
                 step="10"
                 value={r}
                 onChange={handleMovingCircleR}
+                className="slider"
+              />
+            </Label>
+
+            <Label htmlFor="f">
+              <Text>{`*Drawing point: ${f}`}</Text>
+              <Slider
+                name="f"
+                min="0"
+                max="1"
+                step="0.1"
+                value={f}
+                onChange={handleDrawingPoint}
                 className="slider"
               />
             </Label>

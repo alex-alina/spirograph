@@ -15,33 +15,37 @@ const StyledLabel = styled.label`
     width: 65%;
   }
 
-  @media(min-width: 1100px) {
+  // @media(min-width: 1100px) {
+  //   flex-direction: row;
+  //   justify-content: space-around;
+  //   align-content: space-between;
+  //   width: 50%;
+  //   margin: 10px auto;
+    
+  //   div {
+  //     margin-right: 10px;
+  //     padding: 0;
+  //     flex: 2;
+  //   }
+  //   .slider {
+  //     flex: 3;
+  //   }
+  // }
+
+  @media(min-width: 1200px) {
     flex-direction: row;
     justify-content: space-around;
     align-content: space-between;
-    width: 50%;
+    width: 80%;
     margin: 10px auto;
     
     div {
-      margin-right: 20px;
+      margin-right: 10px;
       padding: 0;
       flex: 2;
     }
     .slider {
       flex: 3;
-    }
-  }
-
-  @media(min-width: 1245px) {
-    width: 80%;
-    
-    div {
-      margin-right: 15px;
-      padding: 0;
-      flex: 3;
-    }
-    .slider {
-      flex: 4;
     }
   }
 `;
