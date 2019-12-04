@@ -143,7 +143,7 @@ export const StyledContainer = style.div`
 `;
 
 export const StyledText = style.div`
-  margin: 0 auto 1.5em auto;
+  margin: 0 auto 1.8em auto;
   font-family: 'Montserrat', sans-serif;
   font-size: 0.8em;
   font-style: italic;
