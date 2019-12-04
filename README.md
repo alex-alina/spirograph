@@ -41,7 +41,7 @@ This is a drawing app that makes mathematical roulette curves and draws circular
 
 * Refactor the Container component and make it more flexible to use with props, to dry the code base by removing the custom containers. 
 * Split DrawSection container into seperate smaller containers.
-* Add a random patterns generator.
+* Add a random pattern generator.
 
 ## Motivation
 
