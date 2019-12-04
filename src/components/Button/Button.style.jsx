@@ -1,22 +1,23 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const StyledButton = styled.button`
   -webkit-appearance: none;
   -moz-appearance: none;
   
   width: auto;
-  max-width: 300px;
+  max-width: 400px;
   min-width: 100px;
   height: 36px;
-  font-size: 0.8em;
-  line-height: 1.5;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
   margin: 0.5em;
-  padding: 2em, 4em;
+  padding: 0.15em 0.5em;
   border-radius: 50px;
-  outline: none;
+  outline: none !important;
   
   @media(min-width: 700px) {
-    font-size: 1.2em;
+    font-size: 1em;
     min-width: 140px;
     margin: 1em 1em 1em 1em;
   }
@@ -35,6 +36,18 @@ const StyledButton = styled.button`
 
     return backgroundColor;
   }};
+
+  &:hover {
+    background-color: ${(props) => {
+    let backgroundColor = '#2fa4ed';
+
+    if (props.primary) backgroundColor = '#2686d4';
+    if (props.secondary) backgroundColor = '#f58905';
+    if (props.disabled) backgroundColor = '#7a7878';
+
+    return backgroundColor;
+  }};
+  }
 
   color: ${(props) => {
     let color = '#fff';

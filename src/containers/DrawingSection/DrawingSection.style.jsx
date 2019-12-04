@@ -1,6 +1,5 @@
 import style from 'styled-components';
 import Container from '../../components/Container/Container';
-import Text from '../../components/Text/Text';
 
 export const WrapperContainer = style(Container)`
   box-sizing: border-box;
@@ -24,7 +23,7 @@ export const ButtonsContainer = style(Container)`
   display: flex;
   justify-content: flex-start; 
   padding: 0;
-  margin-bottom: 0.5em; 
+  margin-bottom: 1em; 
   
   @media(min-width: 700px) {
     justify-content: space-around;
@@ -109,8 +108,8 @@ export const StyledCanvas = style.canvas`
   }
   
   @media(min-width: 1254px) {
-    width: 75vh;
-    height: 75vh;
+    width: 78vh;
+    height: 78vh;
   }
 `;
 
@@ -146,7 +145,11 @@ export const StyledContainer = style.div`
 export const StyledText = style.div`
   margin: 0 auto 1.5em auto;
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.1em;
+  font-size: 0.8em;
   font-style: italic;
   color: #2fa4ed;
+  
+  @media(min-width: 700px) {
+    font-size: 1.1em;
+  }
 `;

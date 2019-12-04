@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Button from '../../components/Button/Button';
 
 export const StyledColorPicker = styled.div`
@@ -12,4 +12,7 @@ export const StyledColorPicker = styled.div`
 export const StyledButton = styled(Button)`
   margin: 10px auto;
   width: 225px;
+  &:hover {
+    background-color: #2686d4;
+  }
 `;

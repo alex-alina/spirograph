@@ -34,7 +34,7 @@ export default function HowToTitle(props) {
         </Text>
 
         <Text margin="0.2">
-          4. Repeat: play around with the commands below to try new patterns
+          4. Repeat: play around with the commands below
         </Text>
       </StyledHowTo>
     </div>
