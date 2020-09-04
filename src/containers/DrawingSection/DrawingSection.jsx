@@ -7,7 +7,7 @@ import Text from '../../components/Text/Text';
 import Slider from '../../components/Slider/Slider';
 import H2 from '../../components/H2/H2';
 import Switch from '../../components/Switch/Switch';
-import calculateDash from '../../utils/utils';
+import { calculateDash } from '../../utils/utils';
 import ColorPicker from '../ColorPicker/ColorPicker';
 import CarouselDisplay from '../../components/CarouselDisplay/CarouselDisplay';
 import HowToSection from '../../components/HowToSection/HowToSection';

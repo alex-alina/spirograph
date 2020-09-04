@@ -1,4 +1,4 @@
-const calculateDash = (num) => {
+export const calculateDash = (num) => {
   let dash = num * 5;
   let gap = num * 2;
 
@@ -12,4 +12,6 @@ const calculateDash = (num) => {
   return dashArr;
 };
 
-export default calculateDash;
+export const generatePatterns = () => {
+
+};
