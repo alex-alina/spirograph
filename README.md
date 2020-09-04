@@ -1,6 +1,6 @@
 ## Spirograph App
 
-## [Demo](https://frosty-raman-e9f7d7.netlify.com/)
+## [Demo](https://spirograph-app.netlify.app/)
 
 ## Quick view
 ![](readme-img.png)
