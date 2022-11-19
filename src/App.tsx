@@ -1,10 +1,11 @@
-import React from 'react';
 import './App.css';
+import Banner from './components/Banner';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Spirograph</h1>
+    <div>
+      <h1>hello</h1>
+      <Banner/>
     </div>
   );
 }
