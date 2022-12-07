@@ -26,7 +26,7 @@ export const StyledLink = style.a`
 export default function HowToTitle() {
   return (
     <div>
-      <H2>
+      <H2 margin="0.75">
         Draw lovely circular patterns using this{" "}
         <StyledLink
           href="https://en.wikipedia.org/wiki/Spirograph"

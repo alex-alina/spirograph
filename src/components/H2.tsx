@@ -14,9 +14,9 @@ const StyledH2 = styled.div<H2Props>`
   width: 90%
 
   ${(props) => (props.margin ? css`
-  margin: ${props.margin}em auto;
-  ` : css`
-  margin: 1em auto;   
+    margin: ${props.margin}em auto;
+    ` : css`
+    margin: 1em auto;   
   `)}
 
   @media(min-width: 700px) {

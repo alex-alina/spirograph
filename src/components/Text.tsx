@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+
 interface TextProps {
   children: string;
   center?: string;
