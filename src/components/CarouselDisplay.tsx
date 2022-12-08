@@ -1,10 +1,19 @@
-import React from 'react';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { Carousel } from 'react-responsive-carousel';
-import patternImages from '../../assets/images/index';
-import StyledContainer from './CarouselDisplay.style';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import patternImages from "../assets/images/index";
+import style from 'styled-components';
 
-export default function CarouselDisplay(props) {
+const StyledContainer = style.div`
+  display: none;
+  
+  @media(min-width: 1254px) {
+    display: block;
+    margin: 3em auto 0 auto;
+  }
+`;
+
+
+export default function CarouselDisplay() {
   return (
     <StyledContainer>
       <Carousel

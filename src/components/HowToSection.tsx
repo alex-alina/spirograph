@@ -39,15 +39,15 @@ export default function HowToTitle() {
       </H2>
 
       <StyledHowTo>
-        <Text margin="0.2">1. Click Start to draw a new pattern</Text>
+        <Text margin={0.1}>1. Click Start to draw a new pattern</Text>
 
-        <Text margin="0.2">2. Click Stop when you like the outcome</Text>
+        <Text margin={0.1}>2. Click Stop when you like the outcome</Text>
 
-        <Text margin="0.2">
+        <Text margin={0.1}>
           3. Click Clear Canvas before trying a new pattern
         </Text>
 
-        <Text margin="0.2">4. Repeat: play around with the commands below</Text>
+        <Text margin={0.1}>4. Repeat: play around with the commands below</Text>
       </StyledHowTo>
     </div>
   );

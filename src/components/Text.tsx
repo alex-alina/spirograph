@@ -3,17 +3,18 @@ import styled, { css } from 'styled-components';
 interface TextProps {
   children: string;
   center?: string;
-  margin: string;
+  margin?: number                                                                                        ;
 }
 
 const StyledText = styled.div<TextProps>`
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.8em;
+  font-size: 1em;
+  line-height: 1.5;
   color: #000;
   text-align: ${(props) => (props.center) && 'center'};
 
 ${(props) => (props.margin ? css`
-  margin: ${props.margin}em
+  margin: ${props.margin}em;
   ` : css`
   margin: 0;   
 `)}
