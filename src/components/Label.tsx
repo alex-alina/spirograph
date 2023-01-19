@@ -6,7 +6,7 @@ interface LabelProps {
   children: ReactNode;
 }
 
-export const StyledLabel = styled.label`
+const StyledLabel = styled.label`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,7 +40,6 @@ export const StyledLabel = styled.label`
 `;
 
 export default function Label({ htmlFor, children }: LabelProps) {
-
   return (
     <StyledLabel htmlFor={htmlFor}>
       {children}

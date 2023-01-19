@@ -1,16 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import StyledSlider from './Slider.style';
+import PropTypes from "prop-types";
+import StyledSlider from "./Slider.style";
 
 export default function Slider(props) {
-  const {
-    min,
-    max,
-    step,
-    name,
-    value,
-    onChange,
-  } = props;
+  const { min, max, step, name, value, onChange, className } = props;
 
   return (
     <StyledSlider
@@ -21,7 +13,7 @@ export default function Slider(props) {
       step={step}
       value={value}
       onChange={onChange}
-      className="slider"
+      className={className || "slider"}
     />
   );
 }
@@ -33,4 +25,5 @@ Slider.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
+  className: PropTypes.string.isRequired,
 };

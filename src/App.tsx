@@ -1,12 +1,13 @@
 import './App.css';
 import Banner from './components/Banner';
+import DrawingSection from './containers/DrawingSection/DrawingSection';
 
 function App() {
   return (
-    <div>
-      <h1>hello</h1>
+    <>
       <Banner/>
-    </div>
+      <DrawingSection />
+    </>
   );
 }
 

@@ -26,7 +26,6 @@ const StyledH2 = styled.div<H2Props>`
 `;
 
 export default function H2({children, center, margin}: H2Props) {
-
   return (
     <StyledH2
       center={center}

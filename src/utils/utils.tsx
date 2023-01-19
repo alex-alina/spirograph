@@ -1,4 +1,4 @@
-const calculateDash = (num: number) => {
+const calculateDash = (num: number): number[] => {
   let dash = num * 5;
   let gap = num * 2;
 
