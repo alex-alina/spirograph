@@ -4,10 +4,10 @@ import DrawingSection from './containers/DrawingSection/DrawingSection';
 
 function App() {
   return (
-    <div>
+    <>
       <Banner/>
       <DrawingSection />
-    </div>
+    </>
   );
 }
 

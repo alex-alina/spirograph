@@ -8,7 +8,6 @@ interface CanvasStyle {
 export const WrapperContainer = style.div`
   display: flex;
   padding: 0.25em;
-
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -107,7 +106,6 @@ export const StyledCanvas = style.canvas<CanvasStyle>`
   margin: 0 auto;
   border: 1px solid transparent;
   background-color: ${(props) => props.backgroundColor};
-
   box-shadow: 
     0 0  0 2px rgb(255, 255, 255),
     0.1em 0.1em 1em rgba(0, 0, 0, 0.1);

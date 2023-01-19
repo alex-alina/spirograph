@@ -28,7 +28,7 @@ const StyledButton = styled.button<ButtonProps>`
   @media(min-width: 700px) {
     font-size: 1em;
     min-width: 140px;
-    margin: 1em 1em 1em 1em;
+    margin: 1em;
   }
   
   &::-moz-focus-inner {
@@ -36,6 +36,7 @@ const StyledButton = styled.button<ButtonProps>`
     border-color: transparent;
   }
 
+  color: #fff;
   background-color: ${(props) => {
     let backgroundColor = '#2fa4ed';
 
@@ -57,16 +58,6 @@ const StyledButton = styled.button<ButtonProps>`
     return backgroundColor;
   }};
   }
-
-  color: ${(props) => {
-    let color = '#fff';
-
-    if (props.primary) color = '#fff';
-    if (props.secondary) color = '#fff';
-    if (props.disabled) color = '#fff';
-
-    return color;
-  }};
 
   border: ${(props) => {
     let borderColor = '#42a5f5';

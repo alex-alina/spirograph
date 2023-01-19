@@ -9,16 +9,16 @@ interface SwitchStyle {
   checked: boolean;
 }
 
-export const StyledLabel = styled.label`
+const StyledLabel = styled.label`
   position: relative;
 `;
 
-export const StyledSwitchContainer = styled.div`
+const StyledSwitchContainer = styled.div`
   width: 70px;
   height: 30px;
 `;
 
-export const StyledInput = styled.input.attrs(
+const StyledInput = styled.input.attrs(
   ({ inputType }: any) => ({
     type: inputType || 'checkbox',
   }),
@@ -30,7 +30,7 @@ export const StyledInput = styled.input.attrs(
   opacity: 0;
 `;
 
-export const StyledSwitchBody = styled.div<SwitchStyle>`
+const StyledSwitchBody = styled.div<SwitchStyle>`
   width: 60px;
   height: 25px;
   border: 2px solid #fff;
@@ -43,7 +43,7 @@ export const StyledSwitchBody = styled.div<SwitchStyle>`
   `)}
 `;
 
-export const StyledSwitchBtn = styled.div<SwitchStyle>`
+const StyledSwitchBtn = styled.div<SwitchStyle>`
   width: 15px;
   height: 15px;
   border: 2px solid #fff;
@@ -68,7 +68,6 @@ export const StyledSwitchBtn = styled.div<SwitchStyle>`
 `;
 
 export default function Switch({checked, onChange}:SwitchProps) {
-
   return (
     <StyledSwitchContainer>
       <StyledLabel>

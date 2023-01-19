@@ -12,7 +12,6 @@ const StyledContainer = style.div`
   }
 `;
 
-
 export default function CarouselDisplay() {
   return (
     <StyledContainer>
@@ -27,11 +26,9 @@ export default function CarouselDisplay() {
         centerMode
         centerSlidePercentage={100}
       >
-        {patternImages.map((img, index) => {
-          const i = index;
-
+        {patternImages.map((_, index) => {
           return (
-            <div key={i}>
+            <div key={index}>
               <img
                 src={patternImages[index]}
                 alt={`Spirograph pattern number ${index + 1}`}

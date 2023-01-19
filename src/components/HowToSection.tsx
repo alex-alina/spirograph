@@ -2,7 +2,14 @@ import H2 from "./H2";
 import Text from "./Text";
 import style from "styled-components";
 
-export const StyledHowTo = style.div`
+const steps = [
+  '1. Click Start to draw a new pattern',
+  '2. Click Stop when you like the outcome',
+  '3. Click Clear Canvas before trying a new pattern',
+  '4. Repeat: play around with the commands below'
+];
+
+const StyledSection = style.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,13 +26,13 @@ export const StyledHowTo = style.div`
   }
 `;
 
-export const StyledLink = style.a`
+const StyledLink = style.a`
   color: #2fa4ed;
 `;
 
-export default function HowToTitle() {
+export default function HowToSection() {
   return (
-    <div>
+    <>
       <H2 margin="0.75">
         Draw lovely circular patterns using this{" "}
         <StyledLink
@@ -38,17 +45,9 @@ export default function HowToTitle() {
         app
       </H2>
 
-      <StyledHowTo>
-        <Text margin={0.1}>1. Click Start to draw a new pattern</Text>
-
-        <Text margin={0.1}>2. Click Stop when you like the outcome</Text>
-
-        <Text margin={0.1}>
-          3. Click Clear Canvas before trying a new pattern
-        </Text>
-
-        <Text margin={0.1}>4. Repeat: play around with the commands below</Text>
-      </StyledHowTo>
-    </div>
+      <StyledSection>
+        {steps.map((step) =>  <Text margin={0.1}>{step}</Text>)}
+      </StyledSection>
+    </>
   );
 }
