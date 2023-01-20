@@ -73,10 +73,10 @@ const DrawSection = () => {
   let [speed, setSpeed] = useState<any>(5);
 
   // drawing point, placed anywhere inside the moving circle
-  let [dot, setDot] = useState<any>(null);
+  let [dot] = useState<any>(null);
 
   // line segments that get drawed
-  let [path, setPath] = useState<any>(null);
+  let [path] = useState<any>(null);
 
   let [isDisabledBegin, setDisableBegin] = useState(false);
   let [isDisabledClear, setDisableClear] = useState(true);
